@@ -28,6 +28,25 @@ Great, how do I use it?
 ###mr-meta-box IS NOT YET PRODUCTION READY!
 Sorry for all the screaming - I just want to make sure nobody uses this yet cause it is still in **very early development phase**. But all suggestions, critics, problems you had with the other libraries/plugins,… are already much appreciated and I promise I'll do my best to try make this thing as good as possible - for me and for all the WordPress developer community.
 
+OK, but what will it look like when it will work?
+-------
+
+Probably something like this:
+```php
+if (is_admin()){
+	$prefix = 'test_';
+	$config = array(
+		'id' => 'test_meta_box',
+		'title' => 'Testing, testing',
+		'postType' => array('post', 'page')
+	);
+	$metaBox = new mrMetaBox($config);
+	$metaBox->addField(array('type' => 'Text', 'id' => $prefix.'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
+	$metaBox->addField(array('type' => 'Textarea', 'id' => $prefix.'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
+	$metaBox->addField(array('type' => 'Checkbox', 'id' => $prefix.'agree', 'label' => 'I agree with TOS: '));
+}
+```
+
 License
 -------
 
