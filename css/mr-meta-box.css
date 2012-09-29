@@ -5,3 +5,24 @@
 	border-top-color: white;
 	border-bottom-color: #DFDFDF;
 }
+
+.mr-meta-box label {
+	font-weight: bold;
+	margin: 2px;
+}
+
+.mr-meta-box label:not(.no-block) {
+	display: block;
+}
+
+.mr-meta-box:nth-child(2) {
+	border-top-width: 0;
+}
+
+.mr-meta-box:last-child {
+	border-bottom-width: 0;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	vertical-align: middle;
+}

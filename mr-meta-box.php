@@ -59,13 +59,22 @@ class mrMetaBox {
 	}
 	
 	public function addField($args) {
-		$newField = array('type' => 'text', 'id' => '', 'value' => '', 'label' => 'Text Field ');
+		$newField = array('type' => 'Text', 'id' => '', 'value' => '', 'label' => 'Text Field ');
 		$newField = array_merge($newField, $args);
 		$this->_fields[] = $newField;
 	}
 	
 	public function displayFieldText($field) {
-		echo sprintf('<div class="mr-meta-box"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+	}
+	
+	public function displayFieldTextarea($field) {
+		echo sprintf('<div class="mr-meta-box"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+	}
+	
+	public function displayFieldCheckbox($field) {
+		$checked = (empty($field['value'])) ? '' : ' checked="checked"';
+		echo sprintf('<div class="mr-meta-box"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
 	}
 }
 
