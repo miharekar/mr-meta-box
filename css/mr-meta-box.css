@@ -1,10 +1,5 @@
-.mr-meta-box {
-	padding: 6px 10px 8px;
-	border-width: 1px 0;
-	border-style: solid;
-	border-top-color: white;
-	border-bottom-color: #DFDFDF;
-}
+/* @override 
+	http://localhost/~mr_foto/outfit7/wp-content/themes/outfit7/mr-meta-box/css/mr-meta-box.css?ver=3.4.2 */
 
 .mr-meta-box label {
 	font-weight: bold;
@@ -15,14 +10,26 @@
 	display: block;
 }
 
-.mr-meta-box:nth-child(2) {
+.mr-meta-box input {
+	vertical-align: middle;
+}
+
+.mr-meta-box-element {
+	padding: 6px 10px 8px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-top-color: white;
+	border-bottom-color: #DFDFDF;
+}
+.mr-meta-box-element:first-child {
 	border-top-width: 0;
 }
 
-.mr-meta-box:last-child {
+.mr-meta-box-element:last-child {
 	border-bottom-width: 0;
 }
 
-input[type="checkbox"], input[type="radio"] {
-	vertical-align: middle;
+.mr-meta-box .color-picker {
+	display: none;
 }
+

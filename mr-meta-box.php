@@ -24,6 +24,10 @@ class mrMetaBox {
 	}
 	
 	public function admin_enqueue_scripts() {
+		wp_enqueue_script('farbtastic');
+		wp_enqueue_style('farbtastic');
+		wp_enqueue_script('modernizr', get_template_directory_uri().'/mr-meta-box/js/modernizr.js');
+		wp_enqueue_script('mr-meta-box', get_template_directory_uri().'/mr-meta-box/js/mr-meta-box.js', array('jquery', 'farbtastic', 'modernizr'), '0.1', true);
 		wp_enqueue_style('mr-meta-box', get_template_directory_uri().'/mr-meta-box/css/mr-meta-box.css');
 	}
 	
@@ -36,10 +40,12 @@ class mrMetaBox {
 	public function displayMetaBox() {
 		global $post, $post_type;
 		echo sprintf('<input type="hidden" name="mr_meta_box_nonce" value="%s">', wp_create_nonce($post_type));
+		echo '<div class="mr-meta-box">';
 		foreach ($this->_fields as $field) {
 			$field['value'] = get_post_meta($post->ID, $field['id'], true);
 			call_user_func(array(&$this, 'displayField'.$field['type']), $field);
 		}
+		echo '</div>';
 	}
 	
 	public function save_post($post_ID) {
@@ -67,16 +73,20 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldText($field) {
-		echo sprintf('<div class="mr-meta-box"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 	
 	public function displayFieldTextarea($field) {
-		echo sprintf('<div class="mr-meta-box"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 	
 	public function displayFieldCheckbox($field) {
 		$checked = (empty($field['value'])) ? '' : ' checked="checked"';
-		echo sprintf('<div class="mr-meta-box"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
+	}
+	
+	public function displayFieldColor($field) {
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="7"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
 	}
 }
 

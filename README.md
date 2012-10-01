@@ -20,7 +20,7 @@ There are some plugins for making meta boxes but when you are developing a plugi
 Well, why would you create your own then?
 -------
 
-Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**.
+Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**. I want to use **HTML5** magic wherever possible and use **fallbacks** for browsers that just aren't that advanced. I want it to look **beautiful**; to be as similar to **default WordPress panels** as possible. **I want it to just work**. 
 
 Great, how do I use it?
 -------
@@ -31,13 +31,13 @@ Sorry for all the screaming - I just want to make sure nobody uses this yet caus
 OK, but what will it look like when it will work?
 -------
 
-Probably something like this:
+This already works, but again, do not use it just yet for production!
 ```php
 if (is_admin()){
-	$prefix = 'test_';
+	$prefix = 'mr_';
 	$config = array(
 		'id' => 'test_meta_box',
-		'title' => 'Testing, testing',
+		'title' => 'mr Meta Box Demo',
 		'prefix' => 'mr_',
 		'postType' => array('post', 'page')
 	);
@@ -45,6 +45,7 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
 	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
 	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
+	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
 }
 ```
 
