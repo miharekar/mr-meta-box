@@ -31,7 +31,7 @@ Sorry for all the screaming - I just want to make sure nobody uses this yet caus
 OK, but what will it look like when it will work?
 -------
 
-This already works, but again, do not use it just yet for production!
+This already works, but again, it's not yet production ready!
 ```php
 if (is_admin()){
 	$prefix = 'mr_';
