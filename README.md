@@ -38,12 +38,13 @@ if (is_admin()){
 	$config = array(
 		'id' => 'test_meta_box',
 		'title' => 'Testing, testing',
+		'prefix' => 'mr_',
 		'postType' => array('post', 'page')
 	);
 	$metaBox = new mrMetaBox($config);
-	$metaBox->addField(array('type' => 'Text', 'id' => $prefix.'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
-	$metaBox->addField(array('type' => 'Textarea', 'id' => $prefix.'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
-	$metaBox->addField(array('type' => 'Checkbox', 'id' => $prefix.'agree', 'label' => 'I agree with TOS: '));
+	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
+	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
+	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
 }
 ```
 

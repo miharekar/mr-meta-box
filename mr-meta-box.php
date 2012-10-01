@@ -4,6 +4,7 @@ class mrMetaBox {
 	protected $_metaBox = array(
 		'id' => null,
 		'title' => 'Title',
+		'prefix' => '',
 		'postType' => array('post'),
 		'context' => 'normal',
 		'priority' => 'default'
@@ -61,6 +62,7 @@ class mrMetaBox {
 	public function addField($args) {
 		$newField = array('type' => 'Text', 'id' => '', 'value' => '', 'label' => 'Text Field ');
 		$newField = array_merge($newField, $args);
+		$newField['id'] = $this->_metaBox['prefix'].$newField['id'];
 		$this->_fields[] = $newField;
 	}
 	
