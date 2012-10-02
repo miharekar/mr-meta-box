@@ -47,6 +47,7 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
 	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
 	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
+	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
 }
 ```
 

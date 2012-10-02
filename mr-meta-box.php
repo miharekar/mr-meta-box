@@ -27,6 +27,7 @@ class mrMetaBox {
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_style('farbtastic');
 		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_script('jquery-ui-slider');
 		wp_enqueue_style('jqueryui');
 		wp_enqueue_script('modernizr', get_template_directory_uri().'/mr-meta-box/js/modernizr.js');
 		wp_enqueue_script('mr-meta-box', get_template_directory_uri().'/mr-meta-box/js/mr-meta-box.js', array('jquery', 'farbtastic', 'modernizr'), '0.1', true);
@@ -97,6 +98,14 @@ class mrMetaBox {
 		$field['maxDate'] = empty($field['maxDate']) ? '' : $field['maxDate'];
 		
 		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="7" data-dateFormat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
+	}
+	
+	public function displayFieldRange($field) {
+		$field['min'] = empty($field['min']) ? '0' : $field['min'];
+		$field['max'] = empty($field['max']) ? '100' : $field['max'];
+		$field['step'] = empty($field['step']) ? '1' : $field['step'];
+		
+		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step']);
 	}
 }
 
