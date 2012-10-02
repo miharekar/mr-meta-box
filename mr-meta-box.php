@@ -26,6 +26,8 @@ class mrMetaBox {
 	public function admin_enqueue_scripts() {
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_style('farbtastic');
+		wp_enqueue_script('jquery-ui-datepicker');
+		wp_enqueue_style('jqueryui');
 		wp_enqueue_script('modernizr', get_template_directory_uri().'/mr-meta-box/js/modernizr.js');
 		wp_enqueue_script('mr-meta-box', get_template_directory_uri().'/mr-meta-box/js/mr-meta-box.js', array('jquery', 'farbtastic', 'modernizr'), '0.1', true);
 		wp_enqueue_style('mr-meta-box', get_template_directory_uri().'/mr-meta-box/css/mr-meta-box.css');
@@ -87,6 +89,14 @@ class mrMetaBox {
 	
 	public function displayFieldColor($field) {
 		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="7"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
+	}
+	
+	public function displayFieldDate($field) {
+		$field['dateFormat'] = empty($field['dateFormat']) ? 'mm/dd/yy' : $field['dateFormat'];
+		$field['minDate'] = empty($field['minDate']) ? '' : $field['minDate'];
+		$field['maxDate'] = empty($field['maxDate']) ? '' : $field['maxDate'];
+		
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="7" data-dateFormat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
 	}
 }
 

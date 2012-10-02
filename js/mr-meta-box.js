@@ -10,4 +10,9 @@
 			$(this).siblings('.color-picker').hide('blind');
 		});
 	}
+	
+	$('.mr-date').each(function() {
+		var $this = $(this);
+		$this.datepicker({dateFormat: $this.data('dateformat'), minDate: $(this).data('mindate'), maxDate: $(this).data('maxdate')});
+	});
 }(jQuery, window));

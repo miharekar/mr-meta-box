@@ -43,6 +43,7 @@ if (is_admin()){
 	);
 	$metaBox = new mrMetaBox($config);
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
+	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
 	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
 	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
 	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
