@@ -39,6 +39,8 @@ class mrMetaBox {
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script('jquery-ui-slider');
+		wp_enqueue_script('thickbox');
+		wp_enqueue_script('media-upload');
 		//scripts from mr-meta-box/js/
 		wp_enqueue_script('timepicker', $this->_path.'/mr-meta-box/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
 		wp_enqueue_script('modernizr', $this->_path.'/mr-meta-box/js/modernizr.js');
@@ -46,6 +48,7 @@ class mrMetaBox {
 		//styles
 		wp_enqueue_style('farbtastic');
 		wp_enqueue_style('jqueryui');
+		wp_enqueue_style('thickbox');
 		wp_enqueue_style('mr-meta-box', $this->_path.'/mr-meta-box/css/mr-meta-box.css');
 	}
 	
@@ -91,20 +94,20 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldText($field) {
-		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 	
 	public function displayFieldTextarea($field) {
-		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 	
 	public function displayFieldCheckbox($field) {
 		$checked = (empty($field['value'])) ? '' : ' checked="checked"';
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
 	}
 	
 	public function displayFieldColor($field) {
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="8"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="8"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
 	}
 	
 	public function displayFieldDate($field) {
@@ -112,7 +115,7 @@ class mrMetaBox {
 		$field['minDate'] = empty($field['minDate']) ? '' : $field['minDate'];
 		$field['maxDate'] = empty($field['maxDate']) ? '' : $field['maxDate'];
 		
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="8" data-dateformat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="8" data-dateformat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
 	}
 		
 	public function displayFieldTime($field) {
@@ -126,7 +129,7 @@ class mrMetaBox {
 			$show .= sprintf('data-show%s="%b"', $input, (in_array($input, $field['show'])));
 		}
 		
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-time" value="%3$s" size="8" data-timeformat="%4$s" data-ampm="%5$s" %6$s></div>', $field['id'], $field['label'], $field['value'], $field['timeFormat'], $field['ampm'], $show);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-time" value="%3$s" size="8" data-timeformat="%4$s" data-ampm="%5$s" %6$s></div>', $field['id'], $field['label'], $field['value'], $field['timeFormat'], $field['ampm'], $show);
 	}
 	
 	public function displayFieldRange($field) {
@@ -134,7 +137,35 @@ class mrMetaBox {
 		$field['max'] = empty($field['max']) ? '100' : $field['max'];
 		$field['step'] = empty($field['step']) ? '1' : $field['step'];
 		
-		echo sprintf('<div class="mr-meta-box-element"><label for="%1$s">%2$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step']);
+	}
+	
+	public function displayFieldImage($field) {
+		global $post;
+		$postID = $field['attachToPost'] ? $post->ID : 0;
+				
+		if(!empty($field['value'])) {
+			$image = wp_get_attachment_image_src($field['value'], 'medium');
+			$hide = '';
+		} else {
+			$image = array('');
+			$hide = ' style="display: none;"';
+		}
+		
+		$image = sprintf('<a href="#"><img class="mr-image" src="%s"%s></a>', $image[0], $hide);
+		
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%5$s<a href="#" class="button mr-image-button" data-post="%4$s">Upload %2$s</a> <a href="#" class="mr-image-delete"%6$s>Remove %2$s</a></div>', $field['id'], $field['label'], $field['value'], $postID, $image, $hide);
+	
+//		echo '<div class="meta_box_default_image" style="display:none"></div>';
+//		if ( $meta ) {
+//			$image = wp_get_attachment_image_src( intval( $meta ), 'medium' );
+//			$image = $image[0];
+//		}				
+//		echo	'<input name="' . $id . '" type="hidden" class="meta_box_upload_image" value="' . intval( $meta ) . '" />
+//					<img src="' . $image . '" class="meta_box_preview_image" alt="" /><br />
+//						<input class="meta_box_upload_image_button button" type="button" rel="' . $post->ID . '" value="Choose Image" />
+//						<small>&nbsp;<a href="#" class="meta_box_clear_image_button">Remove Image</a></small>
+//						<br clear="all" />' . $desc;
 	}
 }
 
