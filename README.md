@@ -60,4 +60,4 @@ Mostly, but it relies on the works of many others:
 
 License
 -------
-mr-meta-box is developed by [Miha Rekar](http://mr.si/) and licensed under the [GPLv2 License](http://www.gnu.org/licenses/gpl-2.0.html)
+mr-meta-box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php)
