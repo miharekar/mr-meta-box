@@ -39,7 +39,6 @@ class mrMetaBox {
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script('jquery-ui-slider');
-		wp_enqueue_script('thickbox');
 		wp_enqueue_script('media-upload');
 		//scripts from mr-meta-box/js/
 		wp_enqueue_script('timepicker', $this->_path.'/mr-meta-box/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
@@ -48,8 +47,9 @@ class mrMetaBox {
 		//styles
 		wp_enqueue_style('farbtastic');
 		wp_enqueue_style('jqueryui');
-		wp_enqueue_style('thickbox');
 		wp_enqueue_style('mr-meta-box', $this->_path.'/mr-meta-box/css/mr-meta-box.css');
+		//bundles
+		add_thickbox();
 	}
 	
 	public function add_meta_boxes() {
@@ -98,7 +98,13 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldTextarea($field) {
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5" placeholder="%4$s">%3$s</textarea></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><textarea name="%1$s" id="%1$s" cols="30" rows="5">%3$s</textarea></div>', $field['id'], $field['label'], $field['value']);
+	}
+	
+	public function displayFieldWYSIWYG($field) {
+		echo sprintf('<div class="mr-meta-box-field"><label for="%s">%s</label>', $field['id'], $field['label']);
+		wp_editor($field['value'], $field['id'], array('media_buttons' => false, 'quicktags' => false));
+		echo '</div>';
 	}
 	
 	public function displayFieldCheckbox($field) {
@@ -107,7 +113,7 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldColor($field) {
-		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="8"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="10"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
 	}
 	
 	public function displayFieldDate($field) {
@@ -115,7 +121,7 @@ class mrMetaBox {
 		$field['minDate'] = empty($field['minDate']) ? '' : $field['minDate'];
 		$field['maxDate'] = empty($field['maxDate']) ? '' : $field['maxDate'];
 		
-		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="8" data-dateformat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="10" data-dateformat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
 	}
 		
 	public function displayFieldTime($field) {
@@ -129,7 +135,7 @@ class mrMetaBox {
 			$show .= sprintf('data-show%s="%b"', $input, (in_array($input, $field['show'])));
 		}
 		
-		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-time" value="%3$s" size="8" data-timeformat="%4$s" data-ampm="%5$s" %6$s></div>', $field['id'], $field['label'], $field['value'], $field['timeFormat'], $field['ampm'], $show);
+		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-time" value="%3$s" size="10" data-timeformat="%4$s" data-ampm="%5$s" %6$s></div>', $field['id'], $field['label'], $field['value'], $field['timeFormat'], $field['ampm'], $show);
 	}
 	
 	public function displayFieldRange($field) {

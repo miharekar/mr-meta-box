@@ -45,6 +45,10 @@
 	margin: 7px 2px;
 }
 
+.mr-meta-box .wp-editor-wrap {
+	background-color: #fff;
+}
+
 #ui-datepicker-div {
 	display: none;
 }

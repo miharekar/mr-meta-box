@@ -13,7 +13,6 @@ There are some plugins for making meta boxes but when you are developing a plugi
 * [My Meta Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
 * [Reusable Custom WordPress Meta Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
 
-
 Well, why would you create your own then?
 -------
 Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**. I want to use **HTML5** magic wherever possible and use **fallbacks** for browsers that just aren't that advanced. I want it to look **beautiful**; to be as similar to **default WordPress panels** as possible. **I want it to just work**. 
@@ -39,23 +38,23 @@ if (is_admin()){
 	$metaBox = new mrMetaBox($config);
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
 	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
-	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'default' => 'Here goes your CV.', 'label' => 'CV: '));
+	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
 	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
 	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
 	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
 	$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
 	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
+	$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:'));
 }
 ```
 
 Is it all your work?
 -------
-Mostly, but it relies on the many works of others:
+Mostly, but it relies on the works of many others:
 * [WordPress](http://wordpress.org/) - no shit, Sherlock
 * [jQuery](http://jquery.com/) - included with WordPress
 * [jQuery UI](http://jqueryui.com/)  - included with WordPress
 * [Farbtastic](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/) - included with WordPress
-* [ThickBox](http://thickbox.net/) - included with WordPress
 * [Modernizr](http://modernizr.com/)
 * [jQuery Timepicker Addon](https://github.com/trentrichardson/jQuery-Timepicker-Addon)
 
