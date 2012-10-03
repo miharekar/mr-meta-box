@@ -1,7 +1,7 @@
-mr-meta-box
+mr meta box
 =============
 
-**mr-meta-box** is a simple class for using powerful WordPress meta boxes as easily as possible.
+**mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.
 
 What are meta boxes?
 -------
@@ -13,8 +13,8 @@ Awesome, but surely someone already thought of that?
 
 There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written. There are only 2 I would recommend:
 
-* [My-Meta-Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
-* [Reusable-Custom-WordPress-Meta-Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
+* [My Meta Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
+* [Reusable Custom WordPress Meta Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
 
 
 Well, why would you create your own then?
@@ -31,7 +31,7 @@ Sorry for all the screaming - I just want to make sure nobody uses this yet caus
 OK, but what will it look like when it will work?
 -------
 
-This already works, but again, it's not yet production ready!
+This already works, but again, it's not yet production ready.
 ```php
 if (is_admin()){
 	$prefix = 'mr_';
@@ -48,8 +48,19 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
 	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
 	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
+	$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
 }
 ```
+
+Is it all your work?
+-------
+Mostly, but it relies on the many works of others:
+* [WordPress](http://wordpress.org/) - no shit, Sherlock
+* [jQuery](http://jquery.com/) - included with WordPress
+* [jQuery UI](http://jqueryui.com/)  - included with WordPress
+* [Farbtastic](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/) - included with WordPress
+* [Modernizr](http://modernizr.com/)
+* [jQuery Timepicker Addon](https://github.com/trentrichardson/jQuery-Timepicker-Addon)
 
 License
 -------

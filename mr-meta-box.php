@@ -2,36 +2,51 @@
 
 class mrMetaBox {
 	protected $_metaBox = array(
-		'id' => null,
-		'title' => 'Title',
-		'prefix' => '',
-		'postType' => array('post'),
-		'context' => 'normal',
-		'priority' => 'default'
+		'id' => null, //string Meta box ID - required
+		'title' => 'Title', //string Title of the meta box
+		'prefix' => '', //string Prefix of the field ids
+		'postType' => array('post'), //array Array of post types you want to add meta box to
+		'context' => 'normal', //string The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side')
+		'priority' => 'default', // string The priority within the context where the boxes should show ('high', 'core', 'default' or 'low')
+		'usage' => 'theme' //string 'theme', 'plugin' or 'http://example.com/path/to/mr-meta-box/folder'
 	);
 	
 	protected $_fields = array();
+	
+	protected $_path;
 	
 	public function __construct($metaBox) {
 		if (!is_admin()) {
 			return;
 		}
-		
 		$this->_metaBox = array_merge($this->_metaBox, $metaBox);
+		
+		if($this->_metaBox['usage'] === 'theme') {
+			$this->_path = get_template_directory_uri();
+		} else if ($this->_metaBox['usage'] === 'plugin') {
+			$this->_path = plugins_url('mr-meta-box', plugin_basename(dirname( __FILE__)));
+		} else {
+			$this->_path = $this->_metaBox['usage'];
+		}
+		
 		add_action('admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts'));
 		add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
 		add_action('save_post', array(&$this, 'save_post'));
 	}
 	
 	public function admin_enqueue_scripts() {
+		//scripts included with WordPress
 		wp_enqueue_script('farbtastic');
-		wp_enqueue_style('farbtastic');
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script('jquery-ui-slider');
+		//scripts from mr-meta-box/js/
+		wp_enqueue_script('timepicker', $this->_path.'/mr-meta-box/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
+		wp_enqueue_script('modernizr', $this->_path.'/mr-meta-box/js/modernizr.js');
+		wp_enqueue_script('mr-meta-box', $this->_path.'/mr-meta-box/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'modernizr', 'timepicker'), '0.1', true);
+		//styles
+		wp_enqueue_style('farbtastic');
 		wp_enqueue_style('jqueryui');
-		wp_enqueue_script('modernizr', get_template_directory_uri().'/mr-meta-box/js/modernizr.js');
-		wp_enqueue_script('mr-meta-box', get_template_directory_uri().'/mr-meta-box/js/mr-meta-box.js', array('jquery', 'farbtastic', 'modernizr'), '0.1', true);
-		wp_enqueue_style('mr-meta-box', get_template_directory_uri().'/mr-meta-box/css/mr-meta-box.css');
+		wp_enqueue_style('mr-meta-box', $this->_path.'/mr-meta-box/css/mr-meta-box.css');
 	}
 	
 	public function add_meta_boxes() {
@@ -89,7 +104,7 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldColor($field) {
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="7"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="color" name="%1$s" id="%1$s" class="mr-color" value="%3$s" size="8"><div class="color-picker"></div></div>', $field['id'], $field['label'], $field['value']);
 	}
 	
 	public function displayFieldDate($field) {
@@ -97,7 +112,21 @@ class mrMetaBox {
 		$field['minDate'] = empty($field['minDate']) ? '' : $field['minDate'];
 		$field['maxDate'] = empty($field['maxDate']) ? '' : $field['maxDate'];
 		
-		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="7" data-dateFormat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-date" value="%3$s" size="8" data-dateformat="%4$s" data-mindate="%5$s" data-maxdate="%6$s"></div>', $field['id'], $field['label'], $field['value'], $field['dateFormat'], $field['minDate'], $field['maxDate']);
+	}
+		
+	public function displayFieldTime($field) {
+		$field['timeFormat'] = empty($field['timeFormat']) ? 'hh:mm tt' : $field['timeFormat'];
+		$field['ampm'] = empty($field['ampm']) ? 'false' : $field['ampm'];
+		$field['show'] = empty($field['show']) ? array('Hour', 'Minute') : $field['show'];
+		
+		$inputs = array('Hour', 'Minute', 'Second', 'Millisec', 'Timezone');
+		$show = '';
+		foreach ($inputs as $input) {
+			$show .= sprintf('data-show%s="%b"', $input, (in_array($input, $field['show'])));
+		}
+		
+		echo sprintf('<div class="mr-meta-box-element"><label class="no-block" for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-time" value="%3$s" size="8" data-timeformat="%4$s" data-ampm="%5$s" %6$s></div>', $field['id'], $field['label'], $field['value'], $field['timeFormat'], $field['ampm'], $show);
 	}
 	
 	public function displayFieldRange($field) {
