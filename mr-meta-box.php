@@ -151,21 +151,9 @@ class mrMetaBox {
 			$image = array('');
 			$hide = ' style="display: none;"';
 		}
-		
 		$image = sprintf('<a href="#"><img class="mr-image" src="%s"%s></a>', $image[0], $hide);
 		
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%5$s<a href="#" class="button mr-image-button" data-post="%4$s">Upload %2$s</a> <a href="#" class="mr-image-delete"%6$s>Remove %2$s</a></div>', $field['id'], $field['label'], $field['value'], $postID, $image, $hide);
-	
-//		echo '<div class="meta_box_default_image" style="display:none"></div>';
-//		if ( $meta ) {
-//			$image = wp_get_attachment_image_src( intval( $meta ), 'medium' );
-//			$image = $image[0];
-//		}				
-//		echo	'<input name="' . $id . '" type="hidden" class="meta_box_upload_image" value="' . intval( $meta ) . '" />
-//					<img src="' . $image . '" class="meta_box_preview_image" alt="" /><br />
-//						<input class="meta_box_upload_image_button button" type="button" rel="' . $post->ID . '" value="Choose Image" />
-//						<small>&nbsp;<a href="#" class="meta_box_clear_image_button">Remove Image</a></small>
-//						<br clear="all" />' . $desc;
 	}
 }
 
