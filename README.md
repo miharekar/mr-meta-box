@@ -33,7 +33,8 @@ if (is_admin()){
 		'id' => 'test_meta_box',
 		'title' => 'mr Meta Box Demo',
 		'prefix' => 'mr_',
-		'postType' => array('post', 'page')
+		'postType' => array('post', 'page'),
+		'usage' => 'plugin'
 	);
 	$metaBox = new mrMetaBox($config);
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
