@@ -102,8 +102,10 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldWYSIWYG($field) {
+		$field['showHTML'] = empty($field['showHTML']) ? false : $field['showHTML'];
+		
 		echo sprintf('<div class="mr-meta-box-field"><label for="%s">%s</label>', $field['id'], $field['label']);
-		wp_editor($field['value'], $field['id'], array('media_buttons' => false, 'quicktags' => false));
+		wp_editor($field['value'], $field['id'], array('media_buttons' => false, 'quicktags' => $field['showHTML']));
 		echo '</div>';
 	}
 	
