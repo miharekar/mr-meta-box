@@ -39,6 +39,7 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
 	$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:', 'showHTML' => true));
 	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
+	$metaBox->addField(array('type' => 'Radio', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
 }
 ```
 

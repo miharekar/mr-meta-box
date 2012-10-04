@@ -49,6 +49,14 @@
 	background-color: #fff;
 }
 
+.mr-meta-box .mr-radio {
+	display: block;
+}
+
+.mr-meta-box .mr-radio label {
+	font-weight: normal;
+}
+
 #ui-datepicker-div {
 	display: none;
 }

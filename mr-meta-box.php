@@ -116,6 +116,9 @@ class mrMetaBox {
 			$format = '<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><select name="%1$s[]" id="%1$s" multiple="multiple">%3$s</select></div>';
 		} else {
 			$format = '<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><select name="%1$s" id="%1$s">%3$s</select></div>';
+		}
+		
+		if (!is_array($field['value'])) {
 			$field['value'] = array($field['value']);
 		}
 		
@@ -129,6 +132,16 @@ class mrMetaBox {
 		}
 				
 		echo sprintf($format, $field['id'], $field['label'], $options);
+	}
+	
+	public function displayFieldRadio($field) {
+		$options = '';
+		foreach ($field['options'] as $optionKey => $optionValue) {
+			$checked = ($optionKey == $field['value']) ? ' checked="checked"' : ''; // '==' intentional since keys can be integers but WP always stores as strings
+			$options .= sprintf('<span class="mr-radio"><input type="radio" name="%1$s" id="%1$s-%2$s" value="%2$s"%4$s> <label class="no-block" for="%1$s-%2$s">%3$s</label></span>	', $field['id'], $optionKey, $optionValue, $checked); 
+		}
+				
+		echo sprintf('<div class="mr-meta-box-field"><label>%s</label>%s</div>', $field['label'], $options);
 	}
 	
 	public function displayFieldColor($field) {
