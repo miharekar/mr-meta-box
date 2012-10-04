@@ -21,7 +21,7 @@ class mrMetaBox {
 		}
 		$this->_metaBox = array_merge($this->_metaBox, $metaBox);
 		
-		if($this->_metaBox['usage'] === 'theme') {
+		if ($this->_metaBox['usage'] === 'theme') {
 			$this->_path = get_template_directory_uri();
 		} else if ($this->_metaBox['usage'] === 'plugin') {
 			$this->_path = plugins_url('mr-meta-box', plugin_basename(dirname( __FILE__)));
@@ -73,11 +73,8 @@ class mrMetaBox {
 		global $post_type;
 		$post_type_object = get_post_type_object($post_type);
 		
-		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)						// Check autosave
-		|| (!isset($_POST['post_ID']) || $post_ID != $_POST['post_ID'])		// Check revision
-		|| (!in_array($post_type, $this->_metaBox['postType']))					// Check current post type
-		|| (!wp_verify_nonce($_POST['mr_meta_box_nonce'], $post_type))			// Check nonce
-		|| (!current_user_can($post_type_object->cap->edit_post, $post_ID))) {	// Check permissions
+		//autosave, revision, post type, nonce and permission checks
+		if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || (!isset($_POST['post_ID']) || $post_ID != $_POST['post_ID']) || (!in_array($post_type, $this->_metaBox['postType'])) || (!wp_verify_nonce($_POST['mr_meta_box_nonce'], $post_type))	|| (!current_user_can($post_type_object->cap->edit_post, $post_ID))) {
 			return $post_ID;
 		}
 		
@@ -102,7 +99,7 @@ class mrMetaBox {
 	}
 	
 	public function displayFieldWYSIWYG($field) {
-		$field['showHTML'] = empty($field['showHTML']) ? false : $field['showHTML'];
+		$field['showHTML'] = ($field['showHTML'] === true) ? true : false;
 		
 		echo sprintf('<div class="mr-meta-box-field"><label for="%s">%s</label>', $field['id'], $field['label']);
 		wp_editor($field['value'], $field['id'], array('media_buttons' => false, 'quicktags' => $field['showHTML']));
@@ -112,6 +109,24 @@ class mrMetaBox {
 	public function displayFieldCheckbox($field) {
 		$checked = (empty($field['value'])) ? '' : ' checked="checked"';
 		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
+	}
+	
+	public function displayFieldSelect($field) {
+		if ($field['multiple'] === true) {
+			$multiple = ' multiple="multiple"';
+			$block = '';
+		} else {
+			$multiple = '';
+			$block = ' class="no-block"';
+		}
+		
+		$options = '';
+		foreach ($field['options'] as $optionKey => $optionValue) {
+			$selected = ($optionKey == $field['value']) ? ' selected="selected"' : ''; // "==" intentional since keys can be given as integers but WordPress always stores as strings
+			$options .= sprintf('<option value="%s"%s>%s</option>', $optionKey, $selected, $optionValue); 
+		}
+		
+		echo sprintf('<div class="mr-meta-box-field"><label%5$s for="%1$s">%2$s</label><select name="%1$s" id="%1$s"%4$s>%3$s</select></div>', $field['id'], $field['label'], $options, $multiple, $block);
 	}
 	
 	public function displayFieldColor($field) {
@@ -152,7 +167,7 @@ class mrMetaBox {
 		global $post;
 		$postID = $field['attachToPost'] ? $post->ID : 0;
 				
-		if(!empty($field['value'])) {
+		if (!empty($field['value'])) {
 			$image = wp_get_attachment_image_src($field['value'], 'medium');
 			$hide = '';
 		} else {
