@@ -27,14 +27,7 @@ OK, but what will it look like when it will work?
 This already works, but again, it's not yet production ready.
 ```php
 if (is_admin()){
-	$prefix = 'mr_';
-	$config = array(
-		'id' => 'test_meta_box',
-		'title' => 'mr Meta Box Demo',
-		'prefix' => 'mr_',
-		'postType' => array('post', 'page'),
-		'usage' => 'plugin'
-	);
+	$config = array('id' => 'test_meta_box', 'title' => 'mr Meta Box Demo', 'prefix' => 'mr_', 'postType' => array('post', 'page'), 'usage' => 'plugin');
 	$metaBox = new mrMetaBox($config);
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
 	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
