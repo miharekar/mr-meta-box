@@ -29,12 +29,12 @@ class mrMetaBox {
 			$this->_path = $this->_metaBox['usage'];
 		}
 		
-		add_action('admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts'));
-		add_action('add_meta_boxes', array(&$this, 'add_meta_boxes'));
-		add_action('save_post', array(&$this, 'save_post'));
+		add_action('admin_enqueue_scripts', array(&$this, 'loadScripts'));
+		add_action('add_meta_boxes', array(&$this, 'addMetaBoxes'));
+		add_action('save_post', array(&$this, 'saveMetaBoxes'));
 	}
 	
-	public function admin_enqueue_scripts() {
+	public function loadScripts() {
 		//scripts included with WordPress
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_script('jquery-ui-datepicker');
@@ -52,7 +52,7 @@ class mrMetaBox {
 		add_thickbox();
 	}
 	
-	public function add_meta_boxes() {
+	public function addMetaBoxes() {
 		foreach ($this->_metaBox['postType'] as $postType) {
 			add_meta_box($this->_metaBox['id'], $this->_metaBox['title'], array(&$this, 'displayMetaBox'), $postType, $this->_metaBox['context'], $this->_metaBox['priority']);
 		}
@@ -69,7 +69,7 @@ class mrMetaBox {
 		echo '</div>';
 	}
 	
-	public function save_post($post_ID) {
+	public function saveMetaBoxes($post_ID) {
 		global $post_type;
 		$post_type_object = get_post_type_object($post_type);
 		
@@ -113,20 +113,22 @@ class mrMetaBox {
 	
 	public function displayFieldSelect($field) {
 		if ($field['multiple'] === true) {
-			$multiple = ' multiple="multiple"';
-			$block = '';
+			$format = '<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><select name="%1$s[]" id="%1$s" multiple="multiple">%3$s</select></div>';
 		} else {
-			$multiple = '';
-			$block = ' class="no-block"';
+			$format = '<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><select name="%1$s" id="%1$s">%3$s</select></div>';
+			$field['value'] = array($field['value']);
 		}
 		
 		$options = '';
+		if(!empty($field['default'])) {
+			$options = sprintf('<option>%s</option>', $field['default']);
+		}
 		foreach ($field['options'] as $optionKey => $optionValue) {
-			$selected = ($optionKey == $field['value']) ? ' selected="selected"' : ''; // "==" intentional since keys can be given as integers but WordPress always stores as strings
+			$selected = (in_array($optionKey, $field['value'])) ? ' selected="selected"' : '';
 			$options .= sprintf('<option value="%s"%s>%s</option>', $optionKey, $selected, $optionValue); 
 		}
-		
-		echo sprintf('<div class="mr-meta-box-field"><label%5$s for="%1$s">%2$s</label><select name="%1$s" id="%1$s"%4$s>%3$s</select></div>', $field['id'], $field['label'], $options, $multiple, $block);
+				
+		echo sprintf($format, $field['id'], $field['label'], $options);
 	}
 	
 	public function displayFieldColor($field) {
