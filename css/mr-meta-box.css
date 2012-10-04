@@ -1,3 +1,27 @@
+.mr-meta-box {
+	display: block;
+	clear: both;
+	overflow: hidden;
+}
+
+.mr-meta-box-panel {
+	display: block;
+	float: left;
+	overflow: hidden;
+	border-width: 0 1px;
+	border-style: solid;
+	border-left-color: white;
+	border-right-color: #DFDFDF;
+}
+
+.mr-meta-box-panel:first-child {
+	border-left-width: 0;
+}
+
+.mr-meta-box-panel:last-child {
+	border-right-width: 0;
+}
+
 .mr-meta-box label {
 	font-weight: bold;
 	margin: 2px;
@@ -18,6 +42,7 @@
 	border-top-color: white;
 	border-bottom-color: #DFDFDF;
 }
+
 .mr-meta-box-field:first-child {
 	border-top-width: 0;
 }

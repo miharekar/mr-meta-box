@@ -8,7 +8,8 @@ class mrMetaBox {
 		'postType' => array('post'), //array Array of post types you want to add meta box to
 		'context' => 'normal', //string The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side')
 		'priority' => 'default', // string The priority within the context where the boxes should show ('high', 'core', 'default' or 'low')
-		'usage' => 'theme' //string 'theme', 'plugin' or 'http://example.com/path/to/mr-meta-box/folder'
+		'usage' => 'theme', //string 'theme', 'plugin' or 'http://example.com/path/to/mr-meta-box/folder'
+		'showInColumns' => false //boolean Whether to show the mr meta box fields in 3 columns - comes handy where there is many fields in one mr meta box
 	);
 	
 	protected $_fields = array();
@@ -60,12 +61,23 @@ class mrMetaBox {
 	
 	public function displayMetaBox() {
 		global $post, $post_type;
+		$fieldCount = 1;
+		$breakingPoint = round(count($this->_fields) / 3);
+				
 		echo sprintf('<input type="hidden" name="mr_meta_box_nonce" value="%s">', wp_create_nonce($post_type));
 		echo '<div class="mr-meta-box">';
+		if ($this->_metaBox['showInColumns']) echo '<div class="mr-meta-box-panel">';
 		foreach ($this->_fields as $field) {
 			$field['value'] = get_post_meta($post->ID, $field['id'], true);
 			call_user_func(array(&$this, 'displayField'.$field['type']), $field);
+			
+			if ($this->_metaBox['showInColumns'] && $fieldCount == $breakingPoint) {
+				echo '</div><div class="mr-meta-box-panel">';
+				$fieldCount = 0;
+			}
+			$fieldCount++;
 		}
+		if ($this->_metaBox['showInColumns']) echo '</div>';
 		echo '</div>';
 	}
 	

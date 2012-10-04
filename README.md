@@ -20,7 +20,7 @@ Because I think I **can** do better and I **want** to do better for my own WordP
 Great, how do I use it?
 -------
 ###mr meta box IS NOT YET PRODUCTION READY!
-Sorry for all the screaming - I just want to make sure nobody uses this yet cause it is still in **very early development phase**. But all suggestions, critics, problems you had with the other libraries/plugins,… are already much appreciated and I promise I'll do my best to try make this thing as good as possible - for me and for all the WordPress developer community.
+Sorry for all the screaming - I just want to make sure nobody uses this yet cause it is still in **early development phase**. But all suggestions, critics, problems you had with the other libraries/plugins,… are already much appreciated and I promise I'll do my best to try make this thing as good as possible - for me and for all the WordPress developer community.
 
 OK, but what will it look like when it will work?
 -------
@@ -56,4 +56,4 @@ Mostly, but it relies on the works of many others:
 
 License
 -------
-mr meta box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php)
+mr meta box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php).php)
