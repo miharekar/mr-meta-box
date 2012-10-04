@@ -123,25 +123,39 @@ class mrMetaBox {
 		}
 		
 		$options = '';
-		if(!empty($field['default'])) {
+		if (!empty($field['default'])) {
 			$options = sprintf('<option>%s</option>', $field['default']);
 		}
 		foreach ($field['options'] as $optionKey => $optionValue) {
 			$selected = (in_array($optionKey, $field['value'])) ? ' selected="selected"' : '';
-			$options .= sprintf('<option value="%s"%s>%s</option>', $optionKey, $selected, $optionValue); 
+			$options .= sprintf('<option value="%s"%s>%s</option>', $optionKey, $selected, $optionValue);
 		}
 				
 		echo sprintf($format, $field['id'], $field['label'], $options);
 	}
 	
-	public function displayFieldRadio($field) {
+	public function displayFieldRadioGroup($field) {
 		$options = '';
 		foreach ($field['options'] as $optionKey => $optionValue) {
 			$checked = ($optionKey == $field['value']) ? ' checked="checked"' : ''; // '==' intentional since keys can be integers but WP always stores as strings
-			$options .= sprintf('<span class="mr-radio"><input type="radio" name="%1$s" id="%1$s-%2$s" value="%2$s"%4$s> <label class="no-block" for="%1$s-%2$s">%3$s</label></span>	', $field['id'], $optionKey, $optionValue, $checked); 
+			$options .= sprintf('<li class="mr-radio"><input type="radio" name="%1$s" id="%1$s-%2$s" value="%2$s"%4$s> <label class="no-block" for="%1$s-%2$s">%3$s</label></li>', $field['id'], $optionKey, $optionValue, $checked);
 		}
 				
-		echo sprintf('<div class="mr-meta-box-field"><label>%s</label>%s</div>', $field['label'], $options);
+		echo sprintf('<div class="mr-meta-box-field"><label>%s</label><ul>%s<ul></div>', $field['label'], $options);
+	}
+	
+	public function displayFieldCheckboxGroup($field) {
+		if (!is_array($field['value'])) {
+			$field['value'] = array($field['value']);
+		}
+		
+		$options = '';
+		foreach ($field['options'] as $optionKey => $optionValue) {
+			$checked = (in_array($optionKey, $field['value'])) ? ' checked="checked"' : '';
+			$options .= sprintf('<li class="mr-checkbox"><input type="checkbox" name="%1$s[]" id="%1$s-%2$s" value="%2$s"%4$s> <label class="no-block" for="%1$s-%2$s">%3$s</li></span>', $field['id'], $optionKey, $optionValue, $checked);
+		}
+				
+		echo sprintf('<div class="mr-meta-box-field"><label>%s</label><ul>%s</ul></div>', $field['label'], $options);
 	}
 	
 	public function displayFieldColor($field) {

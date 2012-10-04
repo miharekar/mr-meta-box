@@ -42,18 +42,18 @@
 .mr-meta-box .mr-image {
 	display: block;
 	max-width: 250px;
-	margin: 7px 2px;
+	margin: 6px 2px;
 }
 
 .mr-meta-box .wp-editor-container {
 	background-color: #fff;
 }
 
-.mr-meta-box .mr-radio {
-	display: block;
+.mr-meta-box ul, .mr-meta-box li {
+	margin: 0;
 }
 
-.mr-meta-box .mr-radio label {
+.mr-meta-box .mr-radio label, .mr-meta-box .mr-checkbox label {
 	font-weight: normal;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .ui-timepicker-div .ui-widget-header {
-	margin-bottom: 8px;
+	margin-bottom: 6px;
 }
 
 .ui-timepicker-div dl {

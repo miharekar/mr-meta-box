@@ -15,7 +15,7 @@ There are some plugins for making meta boxes but when you are developing a plugi
 
 Well, why would you create your own then?
 -------
-Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**. I want to use **HTML5** magic wherever possible and use **fallbacks** for browsers that just aren't that advanced. I want it to look **beautiful**; to be as similar to **default WordPress panels** as possible. **I want it to just work**. 
+Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**. I want to use **HTML5** magic wherever possible and use **fallbacks** for browsers that just aren't that advanced. I want it to look **beautiful**; to be as similar to **default WordPress panels** as possible. **I want it to just work**.
 
 Great, how do I use it?
 -------
@@ -39,7 +39,8 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
 	$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:', 'showHTML' => true));
 	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
-	$metaBox->addField(array('type' => 'Radio', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
+	$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
+	$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
 }
 ```
 
@@ -55,4 +56,4 @@ Mostly, but it relies on the works of many others:
 
 License
 -------
-mr-meta-box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php)
+mr-meta-box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php))
