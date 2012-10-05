@@ -1,4 +1,6 @@
-#mr meta box
+#mr meta box 0.1
+Version: 0.1
+Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
 
 **mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.
 
@@ -21,11 +23,11 @@ Because I think I **can** do better and I **want** to do better for my own WordP
 
 mr meta box is still in **development phase**, but you can already use it. There are more features coming, but it can already do most of what others do, but better and prettier. All suggestions, critics, problems,… you had with the other libraries/plugins,… are much appreciated so I can make mr meta box even better. If you have any problems with mr meta box please [open an issue](https://github.com/mrfoto/mr-meta-box/issues).
 
-##Awesome, lets do this!
+##Well, let's do this!
 
-There are only 3 steps to get your shiny meta boxes working:
+There are **only 3 steps** to get your shiny meta boxes working:
 ###1. Require mr meta box
-Put this in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
+Download mr meta box and place it in your plugin/theme/wherever than put this code in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
 require_once('mr-meta-box/mr-meta-box.php');
 ```
