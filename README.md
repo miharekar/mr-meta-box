@@ -1,10 +1,8 @@
-#mr meta box 0.1
-
-Version: 0.1
-
-Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
+#mr meta box
 
 **mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.
+Version: 0.1
+Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
 
 ##What are meta boxes?
 
