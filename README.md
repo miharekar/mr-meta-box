@@ -78,21 +78,18 @@ There are many different types of fields you can have in your mr meta box:
 
 There is a `demo.php` in the works but until then here is an example on how you can use them:
 ```php
-	$config = array('id' => 'test_meta_box', 'title' => 'mr Meta Box Demo', 'prefix' => 'mr_', 'postType' => array('post', 'page'), 'usage' => 'plugin');
-	$metaBox = new mrMetaBox($config);
-	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
-	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
-	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
-	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
-	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
-	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
-	$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
-	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
-	$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:', 'showHTML' => true));
-	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
-	$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
-	$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
-
+$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
+$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
+$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
+$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
+$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
+$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
+$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
+$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
+$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:', 'showHTML' => true));
+$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
+$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
+$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
 ```
 
 ##Is it all your work?
