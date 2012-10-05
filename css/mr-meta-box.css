@@ -74,7 +74,11 @@
 	background-color: #fff;
 }
 
-.mr-meta-box ul, .mr-meta-box li {
+.mr-meta-box ul {
+	margin: 0 2px;
+}
+
+.mr-meta-box li {
 	margin: 0;
 }
 
@@ -92,6 +96,7 @@
 
 .ui-timepicker-div dl {
 	text-align: left;
+	margin: 0;
 }
 
 .ui-timepicker-div dl dt {

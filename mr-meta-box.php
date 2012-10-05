@@ -96,10 +96,22 @@ class mrMetaBox {
 	}
 	
 	public function addField($args) {
-		$newField = array('type' => 'Text', 'id' => '', 'value' => '', 'label' => 'Text Field ');
+		$newField = array('type' => '', 'id' => '', 'value' => '', 'label' => '');
 		$newField = array_merge($newField, $args);
 		$newField['id'] = $this->_metaBox['prefix'].$newField['id'];
-		$this->_fields[] = $newField;
+		$this->_fields[$newField['id']] = $newField;
+	}
+	
+	public function addFieldsSimple($fields) {
+		foreach ($fields as $type => $label) {
+			$this->addField(array('type' => $type, 'id' => $this->makeLabelIDFriendly($label), 'label' => $label));
+		}
+	}
+	
+	private function makeLabelIDFriendly($label) {
+		$label = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label);
+		$label = trim(ereg_replace(' +', ' ', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($label))));		
+		return str_replace(' ', '', $label);
 	}
 	
 	public function displayFieldText($field) {
