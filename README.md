@@ -33,7 +33,7 @@ require_once('mr-meta-box/mr-meta-box.php');
 ```
 
 ###2. Define mr meta box
-Define what you need - the only required field is '`id'`. Down there are the default values, so if you want to use the same, you don't have to define it. Awesome, huh?
+Define what you need - the only required field is `'id'`. Down there are the default values, so if you want to use the same, you don't have to define it. Awesome, huh?
 ```php
 $config = array(
 	'id' => null, //string Meta box ID - required
