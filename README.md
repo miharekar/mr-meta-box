@@ -24,18 +24,13 @@ mr meta box is still in **development phase**, but you can already use it. There
 ##Awesome, lets do this!
 
 There are only 3 steps to get your shiny meta boxes working:
-
-1. Require mr meta box
-2. Define mr meta box 
-3. Define fields
-
-###Require mr meta box
+###1. Require mr meta box
 Put this in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
 require_once('mr-meta-box/mr-meta-box.php');
 ```
 
-###Define mr meta box
+###2. Define mr meta box
 Define what you need - the only required field is '`id'`. Down there are the default values, so if you want to use the same, you don't have to define it. Awesome, huh?
 ```php
 $config = array(
@@ -51,7 +46,7 @@ $config = array(
 $metaBox = new mrMetaBox($config);
 ```
 
-###Define fields
+###3. Define fields
 Now, that your mr meta box is ready, you just need to tell it what fields to show. Here is where it gets **really interesting**. If, for example, you just want to add some quick fields, and don't care about any default values, formats, limitation or any other options, I've provided a shortcut method `addFieldsSimple`:
 ```php
 $metaBox->addFieldsSimple(array(
