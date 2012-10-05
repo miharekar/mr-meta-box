@@ -9,7 +9,6 @@ With meta boxes you can make WordPress as versatile as any other CMS. Maybe you 
 Awesome, but surely someone already thought of that?
 -------
 There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written. There are only 2 I could recommend:
-
 * [My Meta Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
 * [Reusable Custom WordPress Meta Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
 
@@ -19,14 +18,64 @@ Because I think I **can** do better and I **want** to do better for my own WordP
 
 Great, how do I use it?
 -------
-###mr meta box IS NOT YET PRODUCTION READY!
-Sorry for all the screaming - I just want to make sure nobody uses this yet cause it is still in **early development phase**. But all suggestions, critics, problems you had with the other libraries/plugins,… are already much appreciated and I promise I'll do my best to try make this thing as good as possible - for me and for all the WordPress developer community.
+mr meta box is still in **development phase**, but you can already use it. There are more features coming, but it can already do most of what others do, but better and prettier. All suggestions, critics, problems,… you had with the other libraries/plugins,… are much appreciated so I can make mr meta box even better. If you have any problems with mr meta box please [open an issue](https://github.com/mrfoto/mr-meta-box/issues).
 
-OK, but what will it look like when it will work?
+Awesome, lets do this!
 -------
-This already works, but again, it's not yet production ready.
+There are only 3 steps to get your shiny meta boxes working:
+1. Require mr meta box
+2. Define mr meta box 
+3. Define fields
+
+###Require mr meta box
+Put this in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
-if (is_admin()){
+require_once('mr-meta-box/mr-meta-box.php');
+```
+###Define mr meta box
+Define what you need - the only required field is '`id'`. Down there are the default values, so if you want to use the same, you don't have to define it. Awesome, huh?
+```php
+$config = array(
+	'id' => null, //string Meta box ID - required
+	'title' => 'Title', //string Title of the meta box
+	'prefix' => '', //string Prefix of the field ids
+	'postType' => array('post'), //array Array of post types you want to add meta box to
+	'context' => 'normal', //string The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side')
+	'priority' => 'default', // string The priority within the context where the boxes should show ('high', 'core', 'default' or 'low')
+	'usage' => 'theme', //string 'theme', 'plugin' or 'http://example.com/path/to/mr-meta-box/folder'
+	'showInColumns' => false //boolean Whether to show the mr meta box fields in 3 columns - comes handy where there is many fields in one mr meta box
+);
+$metaBox = new mrMetaBox($config);
+```
+###Define fields
+Now, that your mr meta box is ready, you just need to tell it what fields to show. Here is where it gets **really interesting**. If, for example, you just want to add some quick fields, and don't care about any default values, formats, limitation or any other options, I've provided a shortcut method `addFieldsSimple`:
+```php
+$metaBox->addFieldsSimple(array(
+	'Text' => 'Name',
+	'Textarea' => 'Description',
+	'Checkbox' => 'Agree to Terms of Service'
+));
+```
+This will auto generate those 3 fields. As you can see, you provide a simple array with field types as keys and labels as values. Couldn't be any simpler.
+
+But, there are times when you will want to precisely tune your meta box - let's say for client. Here is where the `addField` method comes in. It is worth noting that those two methods are 100% compatible, so you can use the first one for some fields and the second one for others.
+
+There are many different types of fields you can have in your mr meta box:
+* Text
+* Textarea
+* WYSIWYG
+* Checkbox
+* Select
+* RadioGroup
+* CheckboxGroup
+* Color
+* Date
+* Time
+* Range
+* Image
+
+There is a `demo.php` in the works but until then here is an example on how you can use them:
+```php
 	$config = array('id' => 'test_meta_box', 'title' => 'mr Meta Box Demo', 'prefix' => 'mr_', 'postType' => array('post', 'page'), 'usage' => 'plugin');
 	$metaBox = new mrMetaBox($config);
 	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
@@ -41,7 +90,7 @@ if (is_admin()){
 	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
 	$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
 	$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
-}
+
 ```
 
 Is it all your work?
@@ -56,4 +105,4 @@ Mostly, but it relies on the works of many others:
 
 License
 -------
-mr meta box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php).php)
+mr meta box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php)
