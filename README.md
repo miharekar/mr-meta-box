@@ -1,28 +1,30 @@
-mr meta box
-=============
+#mr meta box
+
 **mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.
 
-What are meta boxes?
--------
+##What are meta boxes?
+
 With meta boxes you can make WordPress as versatile as any other CMS. Maybe you just want to add some **user friendly** custom fields to post or page or maybe you are dealing with **custom post types** and want to make them 1000 times more powerful - meta boxes are an **awesome way** to do that. The problem is that it's fairly complicated to make them and it requires a lot of code. Things get pretty messy even when you just want to add one simple text field as shown in this [Smashing Magazine Tutorial](http://wp.smashingmagazine.com/2011/10/04/create-custom-post-meta-boxes-wordpress/).
 
-Awesome, but surely someone already thought of that?
--------
+##Awesome, but surely someone already thought of that?
+
 There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written. There are only 2 I could recommend:
+
 * [My Meta Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
 * [Reusable Custom WordPress Meta Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
 
-Well, why would you create your own then?
--------
+##Well, why would you create your own then?
+
 Because I think I **can** do better and I **want** to do better for my own WordPress plugins and themes. I think it should be even **easier**, require even **less code** and provide even **better results**. I want to use **HTML5** magic wherever possible and use **fallbacks** for browsers that just aren't that advanced. I want it to look **beautiful**; to be as similar to **default WordPress panels** as possible. **I want it to just work**.
 
-Great, how do I use it?
--------
+##Great, how do I use it?
+
 mr meta box is still in **development phase**, but you can already use it. There are more features coming, but it can already do most of what others do, but better and prettier. All suggestions, critics, problems,… you had with the other libraries/plugins,… are much appreciated so I can make mr meta box even better. If you have any problems with mr meta box please [open an issue](https://github.com/mrfoto/mr-meta-box/issues).
 
-Awesome, lets do this!
--------
+##Awesome, lets do this!
+
 There are only 3 steps to get your shiny meta boxes working:
+
 1. Require mr meta box
 2. Define mr meta box 
 3. Define fields
@@ -32,6 +34,7 @@ Put this in your `functions.php` or your main plugin file or wherever you want t
 ```php
 require_once('mr-meta-box/mr-meta-box.php');
 ```
+
 ###Define mr meta box
 Define what you need - the only required field is '`id'`. Down there are the default values, so if you want to use the same, you don't have to define it. Awesome, huh?
 ```php
@@ -47,6 +50,7 @@ $config = array(
 );
 $metaBox = new mrMetaBox($config);
 ```
+
 ###Define fields
 Now, that your mr meta box is ready, you just need to tell it what fields to show. Here is where it gets **really interesting**. If, for example, you just want to add some quick fields, and don't care about any default values, formats, limitation or any other options, I've provided a shortcut method `addFieldsSimple`:
 ```php
@@ -61,6 +65,7 @@ This will auto generate those 3 fields. As you can see, you provide a simple arr
 But, there are times when you will want to precisely tune your meta box - let's say for client. Here is where the `addField` method comes in. It is worth noting that those two methods are 100% compatible, so you can use the first one for some fields and the second one for others.
 
 There are many different types of fields you can have in your mr meta box:
+
 * Text
 * Textarea
 * WYSIWYG
@@ -93,8 +98,8 @@ There is a `demo.php` in the works but until then here is an example on how you 
 
 ```
 
-Is it all your work?
--------
+##Is it all your work?
+
 Mostly, but it relies on the works of many others:
 * [WordPress](http://wordpress.org/) - no shit, Sherlock
 * [jQuery](http://jquery.com/) - included with WordPress
@@ -103,6 +108,6 @@ Mostly, but it relies on the works of many others:
 * [Modernizr](http://modernizr.com/)
 * [jQuery Timepicker Addon](https://github.com/trentrichardson/jQuery-Timepicker-Addon)
 
-License
--------
+##License
+
 mr meta box is developed by [Miha Rekar](http://mr.si/) and licensed under the [MIT License](http://opensource.org/licenses/mit-license.php)
