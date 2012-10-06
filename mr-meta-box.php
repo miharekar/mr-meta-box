@@ -92,7 +92,7 @@ class mrMetaBox {
 	public function displayMetaBox() {
 		global $post, $post_type;
 		$fieldCount = 1;
-		$breakingPoint = round(count($this->_fields) / 3);
+		$breakingPoint = ceil(count($this->_fields) / 3);
 
 		echo sprintf('<input type="hidden" name="mr_meta_box_nonce" value="%s">', wp_create_nonce($post_type));
 		echo '<div class="mr-meta-box">';
