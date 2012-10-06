@@ -1,10 +1,10 @@
 <?php
 /**
- * @package mr meta box
- * @author Miha Rekar <info @ mr.si>
- * @copyright Miha Rekar 2012
- * @version 0.1
- */
+* @package mr meta box
+* @author Miha Rekar <info @ mr.si>
+* @copyright Miha Rekar 2012
+* @version 0.1
+*/
 class mrMetaBox {
 	protected $_metaBox = array(
 		'id' => null, //string Meta box ID - required
@@ -22,12 +22,12 @@ class mrMetaBox {
 	protected $_path;
 
 	/**
-	 * mr meta box constructor
-	 * 
-	 * @access public
-	 * @param mixed $metaBox
-	 * @return void
-	 */
+	* mr meta box constructor
+	*
+	* @access public
+	* @param mixed $metaBox
+	* @return void
+	*/
 	public function __construct($metaBox) {
 		if (!is_admin()) {
 			return;
@@ -48,11 +48,11 @@ class mrMetaBox {
 	}
 
 	/**
-	 * load all the scripts necessary for all types of fields to work
-	 * 
-	 * @access public
-	 * @return void
-	 */
+	* load all the scripts necessary for all types of fields to work
+	*
+	* @access public
+	* @return void
+	*/
 	public function loadScripts() {
 		//scripts included with WordPress
 		wp_enqueue_script('farbtastic');
@@ -72,11 +72,11 @@ class mrMetaBox {
 	}
 
 	/**
-	 * adds meta box to post types
-	 * 
-	 * @access public
-	 * @return void
-	 */
+	* adds meta box to post types
+	*
+	* @access public
+	* @return void
+	*/
 	public function addMetaBoxes() {
 		foreach ($this->_metaBox['postType'] as $postType) {
 			add_meta_box($this->_metaBox['id'], $this->_metaBox['title'], array(&$this, 'displayMetaBox'), $postType, $this->_metaBox['context'], $this->_metaBox['priority']);
@@ -84,11 +84,11 @@ class mrMetaBox {
 	}
 
 	/**
-	 * displays meta boxes
-	 * 
-	 * @access public
-	 * @return void
-	 */
+	* displays meta boxes
+	*
+	* @access public
+	* @return void
+	*/
 	public function displayMetaBox() {
 		global $post, $post_type;
 		$fieldCount = 1;
@@ -112,12 +112,12 @@ class mrMetaBox {
 	}
 
 	/**
-	 * saves meta boxes
-	 * 
-	 * @access public
-	 * @param string $post_ID
-	 * @return void
-	 */
+	* saves meta boxes
+	*
+	* @access public
+	* @param string $post_ID
+	* @return void
+	*/
 	public function saveMetaBoxes($post_ID) {
 		global $post_type;
 		$post_type_object = get_post_type_object($post_type);
@@ -133,12 +133,12 @@ class mrMetaBox {
 	}
 
 	/**
-	 * adds field. Options are explained in the demo.php
-	 * 
-	 * @access public
-	 * @param mixed $args
-	 * @return void
-	 */
+	* adds field. Options are explained in the demo.php
+	*
+	* @access public
+	* @param mixed $args
+	* @return void
+	*/
 	public function addField($args) {
 		$newField = array('type' => '', 'id' => '', 'value' => '', 'label' => '');
 		$newField = array_merge($newField, $args);
@@ -147,12 +147,12 @@ class mrMetaBox {
 	}
 
 	/**
-	 * add fields simply by providing array with field types as keys and labels as values
-	 * 
-	 * @access public
-	 * @param mixed $fields
-	 * @return void
-	 */
+	* add fields simply by providing array with field types as keys and labels as values
+	*
+	* @access public
+	* @param mixed $fields
+	* @return void
+	*/
 	public function addFieldsSimple($fields) {
 		foreach ($fields as $type => $label) {
 			$this->addField(array('type' => $type, 'id' => $this->makeLabelIDFriendly($label), 'label' => $label));
@@ -160,12 +160,12 @@ class mrMetaBox {
 	}
 
 	/**
-	 * returns "id friendly" label
-	 * 
-	 * @access private
-	 * @param string $label
-	 * @return string
-	 */
+	* returns "id friendly" label
+	*
+	* @access private
+	* @param string $label
+	* @return string
+	*/
 	private function makeLabelIDFriendly($label) {
 		$label = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label);
 		$label = trim(ereg_replace(' +', ' ', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($label))));
@@ -200,16 +200,16 @@ class mrMetaBox {
 			$format = '<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><select name="%1$s" id="%1$s">%3$s</select></div>';
 		}
 
-		if (!is_array($field['value'])) {
+		if ($field['value'] !== '' && !is_array($field['value'])) {
 			$field['value'] = array($field['value']);
 		}
 
 		$options = '';
 		if (!empty($field['default'])) {
-			$options = sprintf('<option>%s</option>', $field['default']);
+			$options = sprintf('<option value="">%s</option>', $field['default']);
 		}
 		foreach ($field['options'] as $optionKey => $optionValue) {
-			$selected = (in_array($optionKey, $field['value'])) ? ' selected="selected"' : '';
+			$selected = (is_array($field['value']) && in_array($optionKey, $field['value'])) ? ' selected="selected"' : '';
 			$options .= sprintf('<option value="%s"%s>%s</option>', $optionKey, $selected, $optionValue);
 		}
 
@@ -227,13 +227,13 @@ class mrMetaBox {
 	}
 
 	public function displayFieldCheckboxGroup($field) {
-		if (!is_array($field['value'])) {
+		if ($field['value'] !== '' && !is_array($field['value'])) {
 			$field['value'] = array($field['value']);
 		}
 
 		$options = '';
 		foreach ($field['options'] as $optionKey => $optionValue) {
-			$checked = (in_array($optionKey, $field['value'])) ? ' checked="checked"' : '';
+			$checked = (is_array($field['value']) && in_array($optionKey, $field['value'])) ? ' checked="checked"' : '';
 			$options .= sprintf('<li class="mr-checkbox"><input type="checkbox" name="%1$s[]" id="%1$s-%2$s" value="%2$s"%4$s> <label class="no-block" for="%1$s-%2$s">%3$s</li></span>', $field['id'], $optionKey, $optionValue, $checked);
 		}
 
