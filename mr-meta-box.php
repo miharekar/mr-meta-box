@@ -254,7 +254,7 @@ class mrMetaBox {
 
 	public function displayFieldTime($field) {
 		$field['timeFormat'] = empty($field['timeFormat']) ? 'hh:mm tt' : $field['timeFormat'];
-		$field['ampm'] = empty($field['ampm']) ? 'false' : $field['ampm'];
+		$field['ampm'] = empty($field['ampm']) ? false : $field['ampm'];
 		$field['show'] = empty($field['show']) ? array('Hour', 'Minute') : $field['show'];
 
 		$inputs = array('Hour', 'Minute', 'Second', 'Millisec', 'Timezone');

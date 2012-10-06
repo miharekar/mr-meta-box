@@ -10,10 +10,7 @@ With meta boxes you can make WordPress as versatile as any other CMS. Maybe you 
 
 ##Awesome, but surely someone already thought of that?
 
-There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written. There are only 2 I could recommend:
-
-* [My Meta Box](https://github.com/bainternet/My-Meta-Box) by [Ohad Raz](http://en.bainternet.info/)
-* [Reusable Custom WordPress Meta Boxes](https://github.com/tammyhart/Reusable-Custom-WordPress-Meta-Boxes) by [Tammy Hart](http://www.tammyhartdesigns.com/)
+There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written.
 
 ##Well, why would you create your own then?
 
@@ -21,7 +18,7 @@ Because I think I **can** do better and I **want** to do better for my own WordP
 
 ##Great, how do I use it?
 
-mr meta box is still in **development phase**, but you can already use it. There are more features coming, but it can already do most of what others do, but better and prettier. All suggestions, critics, problems,… you had with the other libraries/plugins,… are much appreciated so I can make mr meta box even better. If you have any problems with mr meta box please [open an issue](https://github.com/mrfoto/mr-meta-box/issues).
+mr meta box is still in **development**, but you can already use it. There are more features coming, but it can already do most of what others do, but better and prettier. All suggestions, critics, problems,… you had with the other libraries/plugins,… are much appreciated so I can make mr meta box even better. If you have any problems with mr meta box please [open an issue](https://github.com/mrfoto/mr-meta-box/issues).
 
 ##Well, let's do this!
 
@@ -63,20 +60,20 @@ But, there are times when you will want to precisely tune your meta box - let's 
 
 There are many different types of fields you can have in your mr meta box:
 
-* Text
-* Textarea
-* WYSIWYG
-* Checkbox
-* Select
-* RadioGroup
-* CheckboxGroup
-* Color
-* Date
-* Time
-* Range
-* Image
+* [Text field](https://github.com/mrfoto/mr-meta-box/wiki/Text-field)
+* [Textarea field](https://github.com/mrfoto/mr-meta-box/wiki/Textarea-field)
+* [WYSIWYG field aka Rich Text Editor](https://github.com/mrfoto/mr-meta-box/wiki/WYSIWYG-field-aka-Rich-Text-Editor)
+* [Checkbox field](https://github.com/mrfoto/mr-meta-box/wiki/Checkbox-field)
+* [Select field](https://github.com/mrfoto/mr-meta-box/wiki/Select-field)
+* [Radio group field](https://github.com/mrfoto/mr-meta-box/wiki/Radio-group-field)
+* [Checkbox group field](https://github.com/mrfoto/mr-meta-box/wiki/Checkbox-group-field)
+* [Color field](https://github.com/mrfoto/mr-meta-box/wiki/Color-field)
+* [Date field](https://github.com/mrfoto/mr-meta-box/wiki/Date-field)
+* [Time Field](https://github.com/mrfoto/mr-meta-box/wiki/Time-Field)
+* [Range field aka Slider](https://github.com/mrfoto/mr-meta-box/wiki/Range-field-aka-Slider)
+* [Image field](https://github.com/mrfoto/mr-meta-box/wiki/Image-field)
 
-There is a `demo.php` in the works but until then here is an example on how you can use them:
+There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here is a quick example on how you can use them:
 ```php
 $metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
 $metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
