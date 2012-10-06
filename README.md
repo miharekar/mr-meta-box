@@ -22,7 +22,7 @@ mr meta box is still in **development**, but you can already use it. There are m
 
 ##Well, let's do this!
 
-There are **only 3 steps** to get your shiny meta boxes working:
+There are **only 3 steps** to get your shiny mr meta box working:
 ###1. Require mr meta box
 Download mr meta box and place it in your plugin/theme/wherever than put this code in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
