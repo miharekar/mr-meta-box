@@ -92,18 +92,18 @@ class mrMetaBox {
 	public function displayMetaBox() {
 		global $post, $post_type;
 		$fieldCount = 1;
-		$breakingPoint = ceil(count($this->_fields) / 3);
-
+		$columnCount = 1;
+		$breakingPoint = round(count($this->_fields) / 3);
 		echo sprintf('<input type="hidden" name="mr_meta_box_nonce" value="%s">', wp_create_nonce($post_type));
 		echo '<div class="mr-meta-box">';
 		if ($this->_metaBox['showInColumns']) echo '<div class="mr-meta-box-panel">';
 		foreach ($this->_fields as $field) {
 			$field['value'] = get_post_meta($post->ID, $field['id'], true);
 			call_user_func(array(&$this, 'displayField'.$field['type']), $field);
-
-			if ($this->_metaBox['showInColumns'] && $fieldCount == $breakingPoint) {
+			if ($this->_metaBox['showInColumns'] && $columnCount < 3 && $fieldCount == $breakingPoint) {
 				echo '</div><div class="mr-meta-box-panel">';
 				$fieldCount = 0;
+				$columnCount++;
 			}
 			$fieldCount++;
 		}
