@@ -110,7 +110,7 @@ if (is_admin()){
 }
 ```
 And this is the actual result:
-![mr meta box demo](https://github.com/mrfoto/mr-meta-box/wiki/demo.png)
+![mr meta box demo](https://raw.github.com/wiki/mrfoto/mr-meta-box/demo.png)
 
 Pretty awesome, huh? :)
 
