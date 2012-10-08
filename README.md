@@ -73,21 +73,46 @@ There are many different types of fields you can have in your mr meta box:
 * [Range field aka Slider](https://github.com/mrfoto/mr-meta-box/wiki/Range-field-aka-Slider)
 * [Image field](https://github.com/mrfoto/mr-meta-box/wiki/Image-field)
 
-There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here is a quick example on how you can use them:
+There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here are 2 quick examples - one big mr meta box with columns and one on the side.
 ```php
-$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
-$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
-$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
-$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
-$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
-$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
-$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
-$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
-$metaBox->addField(array('type' => 'WYSIWYG', 'id' => 'description', 'label' => 'Tell me about yourself:', 'showHTML' => true));
-$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
-$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
-$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
+if (is_admin()){
+	$config = array(
+		'id' => 'mr_meta_box_demo',
+		'title' => 'mr meta box demo',
+		'prefix' => 'mr_',
+		'showInColumns' => true
+	);
+	$metaBox = new mrMetaBox($config);
+	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
+	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
+	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
+	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
+	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
+	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
+	$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
+	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
+	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
+	
+	$config = array(
+		'id' => 'mr_meta_box_demo_side',
+		'title' => 'mr meta box demo side',
+		'context' => 'side',
+		'prefix' => 'side_mr_'
+	);
+	$metaBox = new mrMetaBox($config);
+	$metaBox->addFieldsSimple(array(
+	    'Text' => 'Name',
+	    'Textarea' => 'Description',
+	    'Checkbox' => 'Agree to Terms of Service'
+	));
+	$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
+	$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
+}
 ```
+And this is the actual result:
+![mr meta box demo](https://github.com/mrfoto/mr-meta-box/wiki/demo.png)
+
+Pretty awesome, huh? :)
 
 ##Is it all your work?
 
