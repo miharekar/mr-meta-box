@@ -1,6 +1,6 @@
 /*
 Description:	mr meta box
-Version:		0.1
+Version:		0.2
 Author:			Miha Rekar
 Author URI:		http://mr.si/
 */
@@ -77,7 +77,7 @@ Author URI:		http://mr.si/
 	$('.mr-image-button').click(function(event) {
 		event.preventDefault();
 		var $this = $(this);
-		window.tb_show($this.val(), 'media-upload.php?type=image&TB_iframe=true&post_id='+$this.data('post'));
+		window.tb_show($this.val(), 'media-upload.php?post_id='+$this.data('post')+'&type=image&TB_iframe=true');
 		
 		window.send_to_editor = function(html) {
 			var imageid = $('img',html).attr('class').match(/wp\-image\-([0-9]+)/);

@@ -1,7 +1,7 @@
 #mr meta box
 
 **mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.  
-Version: 0.1  
+Version: 0.2 
 Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
 
 ##What are meta boxes?
@@ -72,6 +72,7 @@ There are many different types of fields you can have in your mr meta box:
 * [Time Field](https://github.com/mrfoto/mr-meta-box/wiki/Time-Field)
 * [Range field aka Slider](https://github.com/mrfoto/mr-meta-box/wiki/Range-field-aka-Slider)
 * [Image field](https://github.com/mrfoto/mr-meta-box/wiki/Image-field)
+* [Gallery field](https://github.com/mrfoto/mr-meta-box/wiki/Gallery-field)
 
 There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here are 2 quick examples - one big mr meta box with columns and one on the side.
 ```php

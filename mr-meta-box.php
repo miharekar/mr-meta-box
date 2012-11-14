@@ -1,9 +1,10 @@
 <?php
+require_once 'mr-post-types.php';
 /**
 * @package mr meta box
 * @author Miha Rekar <info @ mr.si>
 * @copyright Miha Rekar 2012
-* @version 0.1
+* @version 0.2
 */
 class mrMetaBox {
 	protected $_metaBox = array(
@@ -62,7 +63,7 @@ class mrMetaBox {
 		//scripts from mr-meta-box/js/
 		wp_enqueue_script('timepicker', $this->_path.'/mr-meta-box/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
 		wp_enqueue_script('modernizr', $this->_path.'/mr-meta-box/js/modernizr.js');
-		wp_enqueue_script('mr-meta-box', $this->_path.'/mr-meta-box/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'modernizr', 'timepicker'), '0.1', true);
+		wp_enqueue_script('mr-meta-box', $this->_path.'/mr-meta-box/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'modernizr', 'timepicker'), '0.2', true);
 		//styles
 		wp_enqueue_style('farbtastic');
 		wp_enqueue_style('jqueryui');
@@ -170,6 +171,28 @@ class mrMetaBox {
 		$label = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label);
 		$label = trim(ereg_replace(' +', ' ', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($label))));
 		return str_replace(' ', '', $label);
+	}
+
+	/**
+	 * returns the ID of the gallery for the field
+	 *
+	 * @param array $field
+	 */
+	private function getPostIDForGallery($field) {
+		global $post;
+		$title = $post->ID . $this->_metaBox['id'] . $field['id'];
+		$gallery = get_page_by_title($title, 'OBJECT', 'mr_meta_box_gallery');
+		if (empty($gallery)) {
+			$gallery = array(
+				'post_title' => $title,
+				'post_type' => 'mr_meta_box_gallery',
+				'post_status' => 'publish'
+			);
+			$id = wp_insert_post($gallery, $wp_error);
+		} else {
+			$id = $gallery->ID;
+		}
+		return $id;
 	}
 
 	public function displayFieldText($field) {
@@ -288,6 +311,12 @@ class mrMetaBox {
 		$image = sprintf('<a href="#"><img class="mr-image" src="%s"%s></a>', $image[0], $hide);
 
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%5$s<a href="#" class="button mr-image-button" data-post="%4$s">Upload %2$s</a> <a href="#" class="mr-image-delete"%6$s>Remove %2$s</a></div>', $field['id'], $field['label'], $field['value'], $postID, $image, $hide);
+	}
+
+	public function displayFieldGallery($field) {
+		global $post;
+		$postID = $this->getPostIDForGallery($field);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $postID);
 	}
 }
 
