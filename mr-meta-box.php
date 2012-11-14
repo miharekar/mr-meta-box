@@ -17,9 +17,7 @@ class mrMetaBox {
 		'usage' => 'theme', //string 'theme', 'plugin' or 'http://example.com/path/to/mr-meta-box/folder'
 		'showInColumns' => false //boolean Whether to show the mr meta box fields in 3 columns - comes handy where there is many fields in one mr meta box
 	);
-
 	protected $_fields = array();
-
 	protected $_path;
 
 	/**
@@ -168,13 +166,11 @@ class mrMetaBox {
 	* @return string
 	*/
 	private function makeLabelIDFriendly($label) {
-		$label = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label);
-		$label = trim(ereg_replace(' +', ' ', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($label))));
-		return str_replace(' ', '', $label);
+		return trim(str_replace(' ', '_', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $label)))));
 	}
 
 	/**
-	 * returns the ID of the gallery for the field
+	 * returns the ID of the gallery for the field. It creates a new one if it doesn't yet exist.
 	 *
 	 * @param array $field
 	 */
@@ -314,10 +310,9 @@ class mrMetaBox {
 	}
 
 	public function displayFieldGallery($field) {
-		global $post;
-		$postID = $this->getPostIDForGallery($field);
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $postID);
+		if(empty($field['value'])) {
+			$field['value'] = $this->getPostIDForGallery($field);
+		}
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s"><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value']);
 	}
 }
-
-?>

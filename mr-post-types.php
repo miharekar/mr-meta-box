@@ -28,5 +28,3 @@ function register_cpt_mr_meta_box_gallery() {
 	);
 	register_post_type('mr_meta_box_gallery', $args);
 }
-
-?>
