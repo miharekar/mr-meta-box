@@ -8,6 +8,13 @@ Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
 
 With meta boxes you can make WordPress as versatile as any other CMS. Maybe you just want to add some **user friendly** custom fields to post or page or maybe you are dealing with **custom post types** and want to make them 1000 times more powerful - meta boxes are an **awesome way** to do that. The problem is that it's fairly complicated to make them and it requires a lot of code. Things get pretty messy even when you just want to add one simple text field as shown in this [Smashing Magazine Tutorial](http://wp.smashingmagazine.com/2011/10/04/create-custom-post-meta-boxes-wordpress/).
 
+###Picture is worth a 1000 words
+
+**mr meta box** helps you turn this:
+![custom fields - before](https://raw.github.com/wiki/mrfoto/mr-meta-box/before.png)
+into this:
+![mr meta box - after](https://raw.github.com/wiki/mrfoto/mr-meta-box/after.png)
+
 ##Awesome, but surely someone already thought of that?
 
 There are some plugins for making meta boxes but when you are developing a plugin or a theme you probably don't want it to rely on some other plugin. There are also a few libraries but most of them are overcomplicating this thing or are very poorly written.
