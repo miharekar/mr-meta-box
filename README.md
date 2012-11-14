@@ -12,7 +12,9 @@ With meta boxes you can make WordPress as versatile as any other CMS. Maybe you 
 
 **mr meta box** helps you turn this:
 ![custom fields - before](https://raw.github.com/wiki/mrfoto/mr-meta-box/before.png)
+
 ---
+
 into this:
 ![mr meta box - after](https://raw.github.com/wiki/mrfoto/mr-meta-box/after.png)
 
