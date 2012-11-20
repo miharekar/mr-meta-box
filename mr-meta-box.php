@@ -315,4 +315,10 @@ class mrMetaBox {
 		}
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s"><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value']);
 	}
+
+	//http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=hra%C5%A1e%2018a,%20smlednik,%20slovenia
+	//https://developers.google.com/maps/documentation/geocoding/#GeocodingRequests
+	public function displayFieldLocation($field) {
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+	}
 }
