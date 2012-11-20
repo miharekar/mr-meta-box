@@ -59,12 +59,12 @@ class mrMetaBox {
 		wp_enqueue_script('jquery-ui-slider');
 		wp_enqueue_script('media-upload');
 		//scripts from mr-meta-box/js/
-		wp_enqueue_script('timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
-		wp_enqueue_script('modernizr', $this->_path.'/js/modernizr.js');
-		wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'modernizr', 'timepicker'), '0.2', true);
+		wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
+		wp_enqueue_script('mr-modernizr', $this->_path.'/js/modernizr.js');
+		wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.2', true);
 		//styles
 		wp_enqueue_style('farbtastic');
-		wp_enqueue_style('jqueryui');
+		wp_enqueue_style('mr-jquery-ui', $this->_path.'/css/jqueryui.css');
 		wp_enqueue_style('mr-meta-box', $this->_path.'/css/mr-meta-box.css');
 		//bundles
 		add_thickbox();
