@@ -128,6 +128,10 @@ class mrMetaBox {
 
 		foreach ($this->_fields as $field) {
 			update_post_meta($post_ID, $field['id'], $_POST[$field['id']]);
+			if ($field['type'] === 'Location') {
+				update_post_meta($post_ID, $field['id'].'_lat', $_POST[$field['id'].'_lat']);
+				update_post_meta($post_ID, $field['id'].'_lng', $_POST[$field['id'].'_lng']);
+			}
 		}
 	}
 
@@ -319,6 +323,9 @@ class mrMetaBox {
 	//http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=hra%C5%A1e%2018a,%20smlednik,%20slovenia
 	//https://developers.google.com/maps/documentation/geocoding/#GeocodingRequests
 	public function displayFieldLocation($field) {
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
+		global $post;
+		$lat = get_post_meta($post->ID, $field['id'] . '_lat', true);
+		$lng = get_post_meta($post->ID, $field['id'] . '_lng', true);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" class="mr-location" value="%3$s" placeholder="%4$s" size="15"><input type="text" name="%1$s_lat" id="%1$s_lat" value="%5$s" placeholder="Lat" size="4"><input type="text" name="%1$s_lng" id="%1$s_lng" value="%6$s" placeholder="Lng" size="4"></div>', $field['id'], $field['label'], $field['value'], $field['default'], $lat, $lng);
 	}
 }
