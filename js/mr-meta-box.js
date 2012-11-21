@@ -69,6 +69,22 @@ Author URI:		http://mr.si/
 		$this.timepicker({timeOnlyTitle: $this.siblings('label').text(), timeFormat: $this.data('timeformat'), ampm: $this.data('ampm'), showHour: $this.data('showhour'), showMinute: $this.data('showminute'), showSecond: $this.data('showsecond'), showMillisec: $this.data('showmillisec'), showTimezone: $this.data('showtimezone')});
 	});
 	
+	$('.mr-location').each(function() {
+		var $this = $(this),
+			$lat = $this.siblings('#'+$this.attr('id')+'_lat'),
+			$lng = $this.siblings('#'+$this.attr('id')+'_lng'),
+			defLocation = new window.google.maps.LatLng($lat.val(), $lng.val());
+		$this.geocomplete({map: '#'+$this.attr('id')+'_map', location: defLocation, markerOptions: {draggable: true}});
+		$this.on('geocode:result', function(event, result){
+			$lat.val(result.geometry.location.lat());
+			$lng.val(result.geometry.location.lng());
+		});
+		$this.on('geocode:dragged', function(event, result){
+			$lat.val(result.lat());
+			$lng.val(result.lng());
+		});
+	});
+	
 	$('.mr-image').click(function (event) {
 		event.preventDefault();
 		$(this).parent().siblings('.mr-image-button').click();

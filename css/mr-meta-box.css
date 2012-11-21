@@ -93,6 +93,11 @@ Author URI:		http://mr.si/
 	font-weight: normal;
 }
 
+.mr-map {
+	height: 200px;
+	margin-top: 5px;	
+}
+
 #ui-datepicker-div {
 	display: none;
 }
