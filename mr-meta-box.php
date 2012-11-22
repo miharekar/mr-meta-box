@@ -195,6 +195,8 @@ class mrMetaBox {
 	}
 
 	public function displayFieldText($field) {
+		$field['default'] = empty($field['default']) ? '' : $field['default'];
+		
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 
@@ -216,11 +218,7 @@ class mrMetaBox {
 	}
 
 	public function displayFieldSelect($field) {
-		if ($field['multiple'] === true) {
-			$format = '<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><select name="%1$s[]" id="%1$s" multiple="multiple">%3$s</select></div>';
-		} else {
-			$format = '<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><select name="%1$s" id="%1$s">%3$s</select></div>';
-		}
+		$format = (array_key_exists('multiple', $field) && $field['multiple'] === true) ? '<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><select name="%1$s[]" id="%1$s" multiple="multiple">%3$s</select></div>' : '<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><select name="%1$s" id="%1$s">%3$s</select></div>';
 
 		if ($field['value'] !== '' && !is_array($field['value'])) {
 			$field['value'] = array($field['value']);
@@ -307,23 +305,22 @@ class mrMetaBox {
 			$image = array('');
 			$hide = ' style="display: none;"';
 		}
+		
 		$image = sprintf('<a href="#"><img class="mr-image" src="%s"%s></a>', $image[0], $hide);
 
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%5$s<a href="#" class="button mr-image-button" data-post="%4$s">Upload %2$s</a> <a href="#" class="mr-image-delete"%6$s>Remove %2$s</a></div>', $field['id'], $field['label'], $field['value'], $postID, $image, $hide);
 	}
 
 	public function displayFieldGallery($field) {
-		if(empty($field['value'])) {
-			$field['value'] = $this->getPostIDForGallery($field);
-		}
+		$field['value'] = empty($field['value']) ? $this->getPostIDForGallery($field) : $field['value'];
+		
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s"><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value']);
 	}
 
 	public function displayFieldLocation($field) {
-		global $post;
-		if (!is_array($field['value'])) {
-			$field['value'] = array_fill(0, 3, '');
-		}
+		$field['default'] = empty($field['default']) ? '' : $field['default'];
+		$field['value'] = is_array($field['value']) ? $field['value'] : array_fill(0, 3, '');
+		
 		echo sprintf('<div class="mr-meta-box-field" id="%1$s_box"><label for="%1$s">%2$s</label><input type="text" name="%1$s[]" id="%1$s" class="mr-location" value="%3$s" placeholder="%4$s" size="29"><input type="text" name="%1$s[]" id="%1$s_lat" value="%5$s" placeholder="Lat" size="12" data-geo="lat"><input type="text" name="%1$s[]" id="%1$s_lng" value="%6$s" placeholder="Lng" size="12" data-geo="lng"><div id="%1$s_map" class="mr-map"></div></div>', $field['id'], $field['label'], $field['value'][0], $field['default'], $field['value'][1], $field['value'][2]);
 	}
 }

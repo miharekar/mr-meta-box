@@ -83,6 +83,7 @@ There are many different types of fields you can have in your mr meta box:
 * [Range field aka Slider](https://github.com/mrfoto/mr-meta-box/wiki/Range-field-aka-Slider)
 * [Image field](https://github.com/mrfoto/mr-meta-box/wiki/Image-field)
 * [Gallery field](https://github.com/mrfoto/mr-meta-box/wiki/Gallery-field)
+* [Location field](https://github.com/mrfoto/mr-meta-box/wiki/Location-field)
 
 There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here are 2 quick examples - one big mr meta box with columns and one on the side.
 ```php
@@ -133,7 +134,8 @@ Mostly, but it relies on the works of many others:
 * [jQuery UI](http://jqueryui.com/)  - included with WordPress
 * [Farbtastic](http://acko.net/blog/farbtastic-jquery-color-picker-plug-in/) - included with WordPress
 * [Modernizr](http://modernizr.com/)
-* [jQuery Timepicker Addon](https://github.com/trentrichardson/jQuery-Timepicker-Addon)
+* [jQuery Timepicker Addon](http://trentrichardson.com/examples/timepicker/)
+* [Geocomplete](http://ubilabs.github.com/geocomplete/)
 
 ##License
 
