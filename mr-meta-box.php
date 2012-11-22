@@ -60,7 +60,7 @@ class mrMetaBox {
 			wp_enqueue_script('jquery-ui-slider');
 			wp_enqueue_script('media-upload');
 			//scripts from Google
-			wp_enqueue_script('mr-google-maps', 'http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places');
+			wp_enqueue_script('mr-google-maps', 'http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places');
 			//scripts from mr-meta-box/js/
 			wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
 			wp_enqueue_script('mr-geocomplete', $this->_path.'/js/geocomplete.js', array('jquery', 'mr-google-maps'));
