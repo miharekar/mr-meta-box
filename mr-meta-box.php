@@ -321,6 +321,9 @@ class mrMetaBox {
 
 	public function displayFieldLocation($field) {
 		global $post;
+		if (!is_array($field['value'])) {
+			$field['value'] = array_fill(0, 3, '');
+		}
 		echo sprintf('<div class="mr-meta-box-field" id="%1$s_box"><label for="%1$s">%2$s</label><input type="text" name="%1$s[]" id="%1$s" class="mr-location" value="%3$s" placeholder="%4$s" size="29"><input type="text" name="%1$s[]" id="%1$s_lat" value="%5$s" placeholder="Lat" size="12" data-geo="lat"><input type="text" name="%1$s[]" id="%1$s_lng" value="%6$s" placeholder="Lng" size="12" data-geo="lng"><div id="%1$s_map" class="mr-map"></div></div>', $field['id'], $field['label'], $field['value'][0], $field['default'], $field['value'][1], $field['value'][2]);
 	}
 }
