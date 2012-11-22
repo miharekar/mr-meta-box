@@ -53,24 +53,26 @@ class mrMetaBox {
 	* @return void
 	*/
 	public function loadScripts() {
-		//scripts included with WordPress
-		wp_enqueue_script('farbtastic');
-		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_script('jquery-ui-slider');
-		wp_enqueue_script('media-upload');
-		//scripts from Google
-		wp_enqueue_script('mr-google-maps', 'http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places');
-		//scripts from mr-meta-box/js/
-		wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
-		wp_enqueue_script('mr-geocomplete', $this->_path.'/js/geocomplete.js', array('jquery', 'mr-google-maps'));
-		wp_enqueue_script('mr-modernizr', $this->_path.'/js/modernizr.js');
-		wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.2', true);
-		//styles
-		wp_enqueue_style('farbtastic');
-		wp_enqueue_style('mr-jquery-ui', $this->_path.'/css/jqueryui.css');
-		wp_enqueue_style('mr-meta-box', $this->_path.'/css/mr-meta-box.css');
-		//bundles
-		add_thickbox();
+		if(!wp_script_is('mr-meta-box')) {
+			//scripts included with WordPress
+			wp_enqueue_script('farbtastic');
+			wp_enqueue_script('jquery-ui-datepicker');
+			wp_enqueue_script('jquery-ui-slider');
+			wp_enqueue_script('media-upload');
+			//scripts from Google
+			wp_enqueue_script('mr-google-maps', 'http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places');
+			//scripts from mr-meta-box/js/
+			wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
+			wp_enqueue_script('mr-geocomplete', $this->_path.'/js/geocomplete.js', array('jquery', 'mr-google-maps'));
+			wp_enqueue_script('mr-modernizr', $this->_path.'/js/modernizr.js');
+			wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.2', true);
+			//styles
+			wp_enqueue_style('farbtastic');
+			wp_enqueue_style('mr-jquery-ui', $this->_path.'/css/jqueryui.css');
+			wp_enqueue_style('mr-meta-box', $this->_path.'/css/mr-meta-box.css');
+			//bundles
+			add_thickbox();
+		}
 	}
 
 	/**
@@ -196,7 +198,7 @@ class mrMetaBox {
 
 	public function displayFieldText($field) {
 		$field['default'] = empty($field['default']) ? '' : $field['default'];
-		
+
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="text" name="%1$s" id="%1$s" value="%3$s" placeholder="%4$s" size="29"></div>', $field['id'], $field['label'], $field['value'], $field['default']);
 	}
 
@@ -305,7 +307,7 @@ class mrMetaBox {
 			$image = array('');
 			$hide = ' style="display: none;"';
 		}
-		
+
 		$image = sprintf('<a href="#"><img class="mr-image" src="%s"%s></a>', $image[0], $hide);
 
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%5$s<a href="#" class="button mr-image-button" data-post="%4$s">Upload %2$s</a> <a href="#" class="mr-image-delete"%6$s>Remove %2$s</a></div>', $field['id'], $field['label'], $field['value'], $postID, $image, $hide);
@@ -313,14 +315,14 @@ class mrMetaBox {
 
 	public function displayFieldGallery($field) {
 		$field['value'] = empty($field['value']) ? $this->getPostIDForGallery($field) : $field['value'];
-		
+
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s"><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value']);
 	}
 
 	public function displayFieldLocation($field) {
 		$field['default'] = empty($field['default']) ? '' : $field['default'];
 		$field['value'] = is_array($field['value']) ? $field['value'] : array_fill(0, 3, '');
-		
+
 		echo sprintf('<div class="mr-meta-box-field" id="%1$s_box"><div><label for="%1$s">%2$s</label><input type="text" name="%1$s[]" id="%1$s" class="mr-location" value="%3$s" placeholder="%4$s" size="29"></div><div><input type="text" name="%1$s[]" id="%1$s_lat" value="%5$s" placeholder="Lat" size="12" data-geo="lat"><input type="text" name="%1$s[]" id="%1$s_lng" value="%6$s" placeholder="Lng" size="12" data-geo="lng"></div><div id="%1$s_map" class="mr-map"></div></div>', $field['id'], $field['label'], $field['value'][0], $field['default'], $field['value'][1], $field['value'][2]);
 	}
 }
