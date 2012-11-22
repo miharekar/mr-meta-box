@@ -33,6 +33,7 @@ mr meta box is still in **development**, but you can already use it. There are m
 ##Well, let's do this!
 
 There are **only 3 steps** to get your shiny mr meta box working:
+
 ###1. Require mr meta box
 Download mr meta box and place it in your plugin/theme/wherever than put this code in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
@@ -85,46 +86,7 @@ There are many different types of fields you can have in your mr meta box:
 * [Gallery field](https://github.com/mrfoto/mr-meta-box/wiki/Gallery-field)
 * [Location field](https://github.com/mrfoto/mr-meta-box/wiki/Location-field)
 
-There is a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) but here are 2 quick examples - one big mr meta box with columns and one on the side.
-```php
-if (is_admin()){
-	$config = array(
-		'id' => 'mr_meta_box_demo',
-		'title' => 'mr meta box demo',
-		'prefix' => 'mr_',
-		'showInColumns' => true
-	);
-	$metaBox = new mrMetaBox($config);
-	$metaBox->addField(array('type' => 'Text', 'id' => 'name', 'default' => 'John Doe', 'label' => 'Full Name: '));
-	$metaBox->addField(array('type' => 'Date', 'id' => 'birthday', 'label' => 'Date of birth: ', 'dateFormat' => 'dd.mm.yy','minDate' => '-100y', 'maxDate' => '-1d'));
-	$metaBox->addField(array('type' => 'Textarea', 'id' => 'cv', 'label' => 'CV: '));
-	$metaBox->addField(array('type' => 'Checkbox', 'id' => 'agree', 'label' => 'I agree with TOS: '));
-	$metaBox->addField(array('type' => 'Color', 'id' => 'eye_color', 'label' => 'Color of your eyes: '));
-	$metaBox->addField(array('type' => 'Range', 'id' => 'height', 'label' => 'Height: ', 'min' => 50, 'max' => 220, 'step' => 5));
-	$metaBox->addField(array('type' => 'Time', 'id' => 'appointment_time', 'label' => 'Time of the appointment: ', 'timeFormat' => 'hh:mm TT', 'ampm' => 'true', 'show' => array('Hour', 'Minute')));
-	$metaBox->addField(array('type' => 'Image', 'id' => 'portrait', 'label' => 'Portrait', 'attachToPost' => true));
-	$metaBox->addField(array('type' => 'Select', 'id' => 'car', 'label' => 'Car maker: ', 'options' => array('Audi', 'BMW', 'Alfa Romeo'), 'default' => 'Select car'));
-	
-	$config = array(
-		'id' => 'mr_meta_box_demo_side',
-		'title' => 'mr meta box demo side',
-		'context' => 'side',
-		'prefix' => 'side_mr_'
-	);
-	$metaBox = new mrMetaBox($config);
-	$metaBox->addFieldsSimple(array(
-	    'Text' => 'Name',
-	    'Textarea' => 'Description',
-	    'Checkbox' => 'Agree to Terms of Service'
-	));
-	$metaBox->addField(array('type' => 'CheckboxGroup', 'id' => 'pets', 'label' => 'Have any pets?', 'options' => array('Cat', 'Dog', 'Aligator')));
-	$metaBox->addField(array('type' => 'RadioGroup', 'id' => 'animal', 'label' => 'Favorite animal:', 'options' => array('Koala', 'Zebra', 'Hedgehog')));
-}
-```
-And this is the actual result:
-![mr meta box demo](https://raw.github.com/wiki/mrfoto/mr-meta-box/demo.png)
-
-Pretty awesome, huh? :)
+There is also a [Wiki](https://github.com/mrfoto/mr-meta-box/wiki) with everything you might want to know on how to use this.
 
 ##Is it all your work?
 
