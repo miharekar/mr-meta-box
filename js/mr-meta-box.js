@@ -71,8 +71,9 @@ Author URI:		http://mr.si/
 	
 	$('.mr-location').each(function() {
 		var $this = $(this),
-			$lat = $this.siblings('#'+$this.attr('id')+'_lat'),
-			$lng = $this.siblings('#'+$this.attr('id')+'_lng'),
+			locationId = $this.attr('id'),
+			$lat = $('#'+locationId+'_lat'),
+			$lng = $('#'+locationId+'_lng'),
 			defLocation = new window.google.maps.LatLng($lat.val(), $lng.val());
 		$this.geocomplete({map: '#'+$this.attr('id')+'_map', location: defLocation, markerOptions: {draggable: true}});
 		$this.on('geocode:result', function(event, result){
