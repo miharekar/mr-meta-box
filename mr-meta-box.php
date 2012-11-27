@@ -4,7 +4,7 @@ require_once 'mr-post-types.php';
 * @package mr meta box
 * @author Miha Rekar <info @ mr.si>
 * @copyright Miha Rekar 2012
-* @version 0.2
+* @version 0.3
 */
 class mrMetaBox {
 	protected $_metaBox = array(
@@ -64,7 +64,7 @@ class mrMetaBox {
 			wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
 			wp_enqueue_script('mr-geocomplete', $this->_path.'/js/geocomplete.js', array('jquery', 'mr-google-maps'));
 			wp_enqueue_script('mr-modernizr', $this->_path.'/js/modernizr.js');
-			wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.2', true);
+			wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.3', true);
 			//styles
 			wp_enqueue_style('farbtastic');
 			wp_enqueue_style('mr-jquery-ui', $this->_path.'/css/jqueryui.css');
