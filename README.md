@@ -37,7 +37,9 @@ There are **only 3 steps** to get your shiny mr meta box working:
 ###1. Require mr meta box
 Download mr meta box and place it in your plugin/theme/wherever than put this code in your `functions.php` or your main plugin file or wherever you want to use meta boxes.
 ```php
-require_once('mr-meta-box/mr-meta-box.php');
+if(!class_exists('mrMetaBox'){
+	require_once('/path/to/mr-meta-box/mr-meta-box.php');
+}
 ```
 
 ###2. Define mr meta box
