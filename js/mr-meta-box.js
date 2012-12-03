@@ -75,7 +75,7 @@ Author URI:		http://mr.si/
 			$lat = $('#'+locationId+'_lat'),
 			$lng = $('#'+locationId+'_lng'),
 			defLocation = new window.google.maps.LatLng($lat.val(), $lng.val());
-		$this.geocomplete({map: '#'+$this.attr('id')+'_map', location: defLocation, markerOptions: {draggable: true}});
+		$this.geocomplete({map: '#'+$this.attr('id')+'_map', location: defLocation, markerOptions: {draggable: true, position: defLocation}});
 		$this.on('geocode:result', function(event, result){
 			$lat.val(result.geometry.location.lat());
 			$lng.val(result.geometry.location.lng());
