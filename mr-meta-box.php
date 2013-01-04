@@ -188,7 +188,7 @@ class mrMetaBox {
 				'post_type' => 'mr_meta_box_gallery',
 				'post_status' => 'publish'
 			);
-			$id = wp_insert_post($gallery, $wp_error);
+			$id = wp_insert_post($gallery);
 		} else {
 			$id = $gallery->ID;
 		}
@@ -297,7 +297,8 @@ class mrMetaBox {
 
 	public function displayFieldImage($field) {
 		global $post;
-		$postID = $field['attachToPost'] ? $post->ID : 0;
+    $attach = isset($field['attachToPost']) ? $field['attachToPost'] : false;
+		$postID = $attach ? $post->ID : 0;
 
 		if (!empty($field['value'])) {
 			$image = wp_get_attachment_image_src($field['value'], 'medium');
@@ -314,8 +315,23 @@ class mrMetaBox {
 
 	public function displayFieldGallery($field) {
 		$field['value'] = empty($field['value']) ? $this->getPostIDForGallery($field) : $field['value'];
-
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s"><a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value']);
+	  	
+		$images = get_posts(array(
+			'post_parent'    => $field['value'],
+			'post_type'      => 'attachment',
+			'numberposts'    => -1,
+			'post_status'    => null,
+			'post_mime_type' => 'image'
+	  	));
+			
+		if($images) {
+			$image = wp_get_attachment_image_src($images[0]->ID, 'medium');
+			$image = sprintf('<a href="#"><img class="mr-image" src="%s"></a>', $image[0]);
+		} else {
+			$image = '<a href="#"><img class="mr-image" src="" style="display: none;"></a>';
+		}
+    
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%4$s<a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value'], $image);
 	}
 
 	public function displayFieldLocation($field) {
