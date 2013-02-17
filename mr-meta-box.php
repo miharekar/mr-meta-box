@@ -41,7 +41,6 @@ class mrMetaBox {
 			$this->_path = $this->_metaBox['usage'];
 		}
 
-		add_action('admin_enqueue_scripts', array(&$this, 'loadScripts'));
 		add_action('add_meta_boxes', array(&$this, 'addMetaBoxes'));
 		add_action('save_post', array(&$this, 'saveMetaBoxes'));
 	}
@@ -81,6 +80,7 @@ class mrMetaBox {
 	* @return void
 	*/
 	public function addMetaBoxes() {
+		$this->loadScripts();
 		foreach ($this->_metaBox['postType'] as $postType) {
 			add_meta_box($this->_metaBox['id'], $this->_metaBox['title'], array(&$this, 'displayMetaBox'), $postType, $this->_metaBox['context'], $this->_metaBox['priority']);
 		}
