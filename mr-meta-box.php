@@ -157,7 +157,7 @@ class mrMetaBox {
 	* @return void
 	*/
 	public function addFieldsSimple($fields) {
-		foreach ($fields as $type => $label) {
+		foreach ($fields as $label => $type) {
 			$this->addField(array('type' => $type, 'id' => $this->makeLabelIDFriendly($label), 'label' => $label));
 		}
 	}

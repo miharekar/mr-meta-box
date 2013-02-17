@@ -62,9 +62,9 @@ $metaBox = new mrMetaBox($config);
 Now, that your mr meta box is ready, you just need to tell it what fields to show. Here is where it gets **really interesting**. If, for example, you just want to add some quick fields, and don't care about any default values, formats, limitation or any other options, I've provided a shortcut method `addFieldsSimple`:
 ```php
 $metaBox->addFieldsSimple(array(
-	'Text' => 'Name',
-	'Textarea' => 'Description',
-	'Checkbox' => 'Agree to Terms of Service'
+	'Name' => 'Text',
+	'Description' => 'Textarea',
+	'Agree to Terms of Service' => 'Checkbox'
 ));
 ```
 This will auto generate those 3 fields. As you can see, you provide a simple array with field types as keys and labels as values. Couldn't be any simpler.
