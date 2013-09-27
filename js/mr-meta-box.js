@@ -1,6 +1,6 @@
 /*
 Description:	mr meta box
-Version:		0.3
+Version:		0.3.1
 Author:			Miha Rekar
 Author URI:		http://mr.si/
 */
@@ -19,11 +19,11 @@ Author URI:		http://mr.si/
 			resizeColumnsTimer = setTimeout(resizeColumns, 1000);
 		}
 	}
-	
+
 	$('.mr-meta-box').parent().css('margin', 0).css('padding', 0);
 	var resizeColumnsTimer = '';
 	resizeColumns();
-	
+
 	if (!window.Modernizr.inputtypes.color) {
 		$('.color-picker').each(function() {
 			var $this = $(this);
@@ -35,7 +35,7 @@ Author URI:		http://mr.si/
 			$(this).siblings('.color-picker').hide('blind', resizeColumns);
 		});
 	}
-	
+
 	if (window.Modernizr.inputtypes.range) {
 		$('.mr-range').on('change', function() {
 			var $this = $(this);
@@ -58,17 +58,17 @@ Author URI:		http://mr.si/
 			$this.siblings('.mr-range-slider').slider('value', parseFloat($this.val()));
 		});
 	}
-	
+
 	$('.mr-date').each(function() {
 		var $this = $(this);
 		$this.datepicker({dateFormat: $this.data('dateformat'), minDate: $(this).data('mindate'), maxDate: $(this).data('maxdate')});
 	});
-	
+
 	$('.mr-time').each(function() {
 		var $this = $(this);
 		$this.timepicker({timeOnlyTitle: $this.siblings('label').text(), timeFormat: $this.data('timeformat'), ampm: $this.data('ampm'), showHour: $this.data('showhour'), showMinute: $this.data('showminute'), showSecond: $this.data('showsecond'), showMillisec: $this.data('showmillisec'), showTimezone: $this.data('showtimezone')});
 	});
-	
+
 	$('.mr-location').each(function() {
 		var $this = $(this),
 			locationId = $this.attr('id'),
@@ -85,26 +85,26 @@ Author URI:		http://mr.si/
 			$lng.val(result.lng());
 		});
 	});
-	
+
 	$('.mr-image').click(function (event) {
 		event.preventDefault();
 		$(this).parent().siblings('.mr-image-button').click();
 	});
-	
+
 	$('.mr-image-button').click(function(event) {
 		event.preventDefault();
 		var $this = $(this);
 		window.tb_show($this.val(), 'media-upload.php?post_id='+$this.data('post')+'&type=image&TB_iframe=true');
-		
+
 		window.send_to_editor = function(html) {
-			var imageid = $('img',html).attr('class').match(/wp\-image\-([0-9]+)/);
+			var imageid = $('<div>'+html+'</div>').find('img').attr('class').match(/wp\-image\-([0-9]+)/);
 			$this.parent().find('.mr-image').attr('src', $('img', html).attr('src')).show('blind');
 			$this.siblings('.mr-image-hidden').val(imageid[1]);
 			$this.siblings('.mr-image-delete').show();
 			window.tb_remove();
 		};
 	});
-	
+
 	$('.mr-image-delete').click(function(event) {
 		event.preventDefault();
 		var $this = $(this);

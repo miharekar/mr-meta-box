@@ -1,6 +1,6 @@
 /*
 Description:	mr meta box
-Version:		0.3
+Version:		0.3.1
 Author:			Miha Rekar
 Author URI:		http://mr.si/
 */
@@ -95,7 +95,7 @@ Author URI:		http://mr.si/
 
 .mr-map {
 	height: 200px;
-	margin-top: 5px;	
+	margin-top: 5px;
 }
 
 #ui-datepicker-div {

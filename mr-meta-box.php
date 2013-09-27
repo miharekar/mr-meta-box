@@ -4,7 +4,7 @@ require_once 'mr-post-types.php';
 * @package mr meta box
 * @author Miha Rekar <info @ mr.si>
 * @copyright Miha Rekar 2012
-* @version 0.3
+* @version 0.3.1
 */
 class mrMetaBox {
 	protected $_metaBox = array(
@@ -63,7 +63,7 @@ class mrMetaBox {
 			wp_enqueue_script('mr-timepicker', $this->_path.'/js/timepicker.js', array('jquery', 'jquery-ui-datepicker'));
 			wp_enqueue_script('mr-geocomplete', $this->_path.'/js/geocomplete.js', array('jquery', 'mr-google-maps'));
 			wp_enqueue_script('mr-modernizr', $this->_path.'/js/modernizr.js');
-			wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.3', true);
+			wp_enqueue_script('mr-meta-box', $this->_path.'/js/mr-meta-box.min.js', array('jquery', 'farbtastic', 'mr-modernizr', 'mr-timepicker'), '0.3.1', true);
 			//styles
 			wp_enqueue_style('farbtastic');
 			wp_enqueue_style('mr-jquery-ui', $this->_path.'/css/jqueryui.css');
@@ -315,7 +315,7 @@ class mrMetaBox {
 
 	public function displayFieldGallery($field) {
 		$field['value'] = empty($field['value']) ? $this->getPostIDForGallery($field) : $field['value'];
-	  	
+
 		$images = get_posts(array(
 			'post_parent'    => $field['value'],
 			'post_type'      => 'attachment',
@@ -323,14 +323,14 @@ class mrMetaBox {
 			'post_status'    => null,
 			'post_mime_type' => 'image'
 	  	));
-			
+
 		if($images) {
 			$image = wp_get_attachment_image_src($images[0]->ID, 'medium');
 			$image = sprintf('<a href="#"><img class="mr-image" src="%s"></a>', $image[0]);
 		} else {
 			$image = '<a href="#"><img class="mr-image" src="" style="display: none;"></a>';
 		}
-    
+
 		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="hidden" name="%1$s" id="%1$s" class="mr-image-hidden" value="%3$s">%4$s<a href="#" class="button mr-image-button" data-post="%3$s">Upload images to %2$s</a></div>', $field['id'], $field['label'], $field['value'], $image);
 	}
 
