@@ -291,8 +291,11 @@ class mrMetaBox {
 		$field['min'] = empty($field['min']) ? '0' : $field['min'];
 		$field['max'] = empty($field['max']) ? '100' : $field['max'];
 		$field['step'] = empty($field['step']) ? '1' : $field['step'];
+		$field['default'] = empty($field['default']) ? '50' : $field['default'];
+		$field['value'] = empty($field['value']) ? $field['default'] : $field['value'];
+		$field['description'] = empty($field['description']) ? '' : '<small>'.$field['description'].'</small>';
 
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s %7$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step'], $field['description']);
 	}
 
 	public function displayFieldImage($field) {

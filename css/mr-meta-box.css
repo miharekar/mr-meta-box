@@ -107,6 +107,11 @@ Author URI:		http://mr.si/
 	font-weight: normal;
 }
 
+.mr-meta-box label small {
+	display: block;
+	color: #999;
+}
+
 .mr-map {
 	height: 200px;
 	margin-top: 5px;
