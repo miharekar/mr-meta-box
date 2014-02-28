@@ -48,7 +48,18 @@ Author URI:		http://mr.si/
 	border-style: solid;
 	border-top-color: white;
 	border-bottom-color: #DFDFDF;
+	position: relative;
 }
+
+.mr-meta-box-field input[type="checkbox"] {
+	float: right;
+	margin-top: 3px;
+}
+
+.mr-meta-box-field input[type="range"] {
+	width: 99%;
+}
+
 
 .mr-meta-box-field:first-child {
 	border-top-width: 0;
@@ -63,7 +74,10 @@ Author URI:		http://mr.si/
 }
 
 .mr-meta-box .mr-range-text {
-	margin-left: 10px;
+	position: absolute;
+	right: 12px;
+	top: 2px;
+	text-align: center;
 }
 
 .mr-meta-box .mr-range-slider {
