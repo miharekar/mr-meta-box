@@ -31,7 +31,6 @@ Author URI:		http://mr.si/
 
 .mr-meta-box label {
 	font-weight: bold;
-	margin: 2px;
 }
 
 .mr-meta-box label:not(.no-block) {
@@ -48,6 +47,21 @@ Author URI:		http://mr.si/
 	border-style: solid;
 	border-top-color: white;
 	border-bottom-color: #DFDFDF;
+	position: relative;
+}
+
+.mr-meta-box-field input[type="checkbox"] {
+	float: right;
+	margin-top: 3px;
+}
+
+.mr-meta-box-field input[type="range"] {
+	width: 99%;
+}
+
+.mr-meta-box-field ul li.mr-radio {
+	display: inline-block;
+	margin: 5px 10px 0;
 }
 
 .mr-meta-box-field:first-child {
@@ -63,7 +77,10 @@ Author URI:		http://mr.si/
 }
 
 .mr-meta-box .mr-range-text {
-	margin-left: 10px;
+	position: absolute;
+	right: 12px;
+	top: 2px;
+	text-align: center;
 }
 
 .mr-meta-box .mr-range-slider {
@@ -91,6 +108,11 @@ Author URI:		http://mr.si/
 
 .mr-meta-box .mr-radio label, .mr-meta-box .mr-checkbox label {
 	font-weight: normal;
+}
+
+.mr-meta-box label small {
+	display: block;
+	color: #999;
 }
 
 .mr-map {
