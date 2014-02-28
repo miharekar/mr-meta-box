@@ -131,7 +131,12 @@ class mrMetaBox {
 		}
 
 		foreach ($this->_fields as $field) {
-			update_post_meta($post_ID, $field['id'], $_POST[$field['id']]);
+			if ($field['type'] == 'Checkbox' && !isset($_POST[$field['id']])) {
+				$field['value'] = '0';
+				update_post_meta($post_ID, $field['id'], $field['value']);
+			} else {
+				update_post_meta($post_ID, $field['id'], $_POST[$field['id']]);	
+			}
 		}
 	}
 
@@ -214,6 +219,8 @@ class mrMetaBox {
 	}
 
 	public function displayFieldCheckbox($field) {
+		$field['default'] = empty($field['default']) ? false : $field['default'];
+		$field['value'] = $field['value'] == '' ? $field['default'] : $field['value'];
 		$checked = (empty($field['value'])) ? '' : ' checked="checked"';
 		echo sprintf('<div class="mr-meta-box-field"><label class="no-block" for="%1$s">%2$s</label><input type="checkbox" name="%1$s" id="%1$s" value="1"%3$s></div>', $field['id'], $field['label'], $checked);
 	}
@@ -238,6 +245,8 @@ class mrMetaBox {
 	}
 
 	public function displayFieldRadioGroup($field) {
+		$field['default'] = empty($field['default']) ? false : $field['default'];
+		$field['value'] = $field['value'] == '' ? $field['default'] : $field['value'];
 		$options = '';
 		foreach ($field['options'] as $optionKey => $optionValue) {
 			$checked = ($optionKey == $field['value']) ? ' checked="checked"' : ''; // '==' intentional since keys can be integers but WP always stores as strings
@@ -291,8 +300,11 @@ class mrMetaBox {
 		$field['min'] = empty($field['min']) ? '0' : $field['min'];
 		$field['max'] = empty($field['max']) ? '100' : $field['max'];
 		$field['step'] = empty($field['step']) ? '1' : $field['step'];
+		$field['default'] = empty($field['default']) ? '50' : $field['default'];
+		$field['value'] = empty($field['value']) ? $field['default'] : $field['value'];
+		$field['description'] = empty($field['description']) ? '' : '<small>'.$field['description'].'</small>';
 
-		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step']);
+		echo sprintf('<div class="mr-meta-box-field"><label for="%1$s">%2$s %7$s</label><input type="range" name="range_%1$s" id="range_%1$s" class="mr-range" value="%3$s" size="29" min="%4$s" max="%5$s" step="%6$s"><div class="mr-range-slider"></div><input type="text" name="%1$s" id="%1$s" class="mr-range-text" value="%3$s" size="3"></div>', $field['id'], $field['label'], $field['value'], $field['min'], $field['max'], $field['step'], $field['description']);
 	}
 
 	public function displayFieldImage($field) {
