@@ -245,6 +245,8 @@ class mrMetaBox {
 	}
 
 	public function displayFieldRadioGroup($field) {
+		$field['default'] = empty($field['default']) ? false : $field['default'];
+		$field['value'] = $field['value'] == '' ? $field['default'] : $field['value'];
 		$options = '';
 		foreach ($field['options'] as $optionKey => $optionValue) {
 			$checked = ($optionKey == $field['value']) ? ' checked="checked"' : ''; // '==' intentional since keys can be integers but WP always stores as strings

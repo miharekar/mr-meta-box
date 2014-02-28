@@ -31,7 +31,6 @@ Author URI:		http://mr.si/
 
 .mr-meta-box label {
 	font-weight: bold;
-	margin: 2px;
 }
 
 .mr-meta-box label:not(.no-block) {
@@ -60,6 +59,10 @@ Author URI:		http://mr.si/
 	width: 99%;
 }
 
+.mr-meta-box-field ul li.mr-radio {
+	display: inline-block;
+	margin: 5px 10px 0;
+}
 
 .mr-meta-box-field:first-child {
 	border-top-width: 0;
