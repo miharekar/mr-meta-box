@@ -1,8 +1,8 @@
 #mr meta box
 
 **mr meta box** is a simple class for using powerful WordPress meta boxes as easily as possible.
-Version: 0.3.1
-Contributors: Miha Rekar - [mrfoto](https://github.com/mrfoto)
+
+Version: 0.3.2
 
 ##What are meta boxes?
 
@@ -100,6 +100,10 @@ Mostly, but it relies on the works of many others:
 * [Modernizr](http://modernizr.com/)
 * [jQuery Timepicker Addon](http://trentrichardson.com/examples/timepicker/)
 * [Geocomplete](http://ubilabs.github.com/geocomplete/)
+
+##Contributors:
+* Miha Rekar - [mrfoto](https://github.com/mrfoto)
+* Karim - [karimhossenbux](https://github.com/karimhossenbux)
 
 ##License
 

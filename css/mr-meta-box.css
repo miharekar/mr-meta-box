@@ -1,6 +1,6 @@
 /*
 Description:	mr meta box
-Version:		0.3.1
+Version:		0.3.2
 Author:			Miha Rekar
 Author URI:		http://mr.si/
 */
